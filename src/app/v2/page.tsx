@@ -120,7 +120,8 @@ export default function Home() {
         <section id="cau-chuyen" className="manifesto section">
           <Reveal className="story-shell">
             <p className="chapter-label">Câu chuyện của chúng tớ</p>
-            <h2>“Về đến nhà nhắn tớ nhé.” <span>Từ một câu nói quen thuộc, Heros biến sự quan tâm thành một kết nối luôn ở bên bạn.</span></h2>
+            <h2>“Về đến nhà nhắn tớ nhé.” </h2>
+            <p className="manifesto-body"><span>Từ một câu nói quen thuộc, Heros biến sự quan tâm thành một kết nối luôn ở bên bạn.</span></p>
             <p className="manifesto-body">Chúng tớ tin rằng cảm giác an tâm không nên giữ bạn ở nhà. Nó nên cùng bạn đi học, đi làm, dạo phố và khám phá những điều mới.</p>
           </Reveal>
         </section>
@@ -139,7 +140,7 @@ export default function Home() {
 
         <section className="lifestyle section" id="theo-cach-cua-ban">
           <div className="wide-shell">
-            <Reveal className="lifestyle-heading"><div><p className="chapter-label">Theo cách của bạn</p><h2>Đi đâu cũng được.<br /><span>Có Heros đi cùng.</span></h2></div><p>Một chiếc túi quen. Một buổi học mới. Hay một ngày chỉ dành cho mình.</p></Reveal>
+            <Reveal className="lifestyle-heading"><div><p className="chapter-label">Theo cách của bạn</p><h2>Bên bạn,<span> trong những điều bình thường nhất</span></h2></div><p>Một chiếc túi quen. Một buổi học mới. Hay một ngày chỉ dành cho mình.</p></Reveal>
             <div className="lifestyle-grid">
               {[
                 {file: "bag", label: "01 / DẠO PHỐ", title: "Cùng chiếc túi bạn yêu.", copy: "Móc nhẹ vào quai túi. Sẵn sàng cho một ngày ngoài phố.", alt: "Người mẫu mang Heros màu hồng gắn trên túi xách màu kem"},
@@ -155,9 +156,11 @@ export default function Home() {
 
         <Order />
 
-        <section className="faq section wide-shell">
-          <div className="chapter-heading faq-heading"><p>Hỏi gì? Đáp nấy.</p><h2>Hiểu Heros thêm một chút.</h2></div>
-          <div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span className="faq-plus">+</span></summary><p>{answer}</p></details>)}</div>
+        <section className="faq section">
+          <div className="wide-shell">
+            <div className="chapter-heading faq-heading"><p>Hỏi gì? Đáp nấy.</p><h2>Hiểu Heros thêm một chút.</h2></div>
+            <div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span className="faq-plus">+</span></summary><p>{answer}</p></details>)}</div>
+          </div>
         </section>
 
         <section id="lien-he" className="contact section">
