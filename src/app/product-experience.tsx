@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ArrowRight, BellRinging, Check } from "@phosphor-icons/react";
 import Heros3D from "./heros-3d";
@@ -10,7 +11,9 @@ export function HerosHero() {
       <div className="product-story-copy">
         <div className="product-intro">
           <p className="chapter-label">HEROS · SAFETY WITH YOU</p>
-          <h1 id="hero-title">Tự do là bạn.<br /><span>An tâm có tớ.</span></h1>
+          {/* <h1 id="hero-title">Tự do là bạn.<br /><span>An tâm có tớ.</span></h1> */}
+          <h1 id="hero-title">Vì bạn xứng đáng được quan tâm.<br /></h1>
+          
           <p className="product-intro-lead">Một người bạn nhỏ, một kết nối thật gần. Heros cùng bạn tự tin đi học, đi làm và khám phá những điều mới.</p>
           <div className="hero-actions"><a className="button" href="#dat-hang">Đặt Heros <ArrowRight size={17} /></a><a className="text-link" href="#cau-chuyen">Câu chuyện của chúng tớ</a></div>
           <a className="scroll-invitation" href="#san-pham"><ArrowDown size={18} /> Cuộn để khám phá Heros</a>
@@ -23,7 +26,25 @@ export function HerosHero() {
           <a className="text-link" href="#highlights-title">Khám phá kết nối <ArrowRight size={17} /></a>
         </div>
       </div>
-      <div className="product-sticky-stage"><Heros3D hero /><div className="product-stage-caption"><span>HEROS / HỒNG PHẤN</span><span>38 × 62 × 16 mm</span></div></div>
+      <div className="product-sticky-stage">
+        <div className="product-static-image">
+          <div className="product-static-frame">
+            <Image
+              className="product-static-background"
+              src="/images/heros-product-background.png"
+              alt="Bục trưng bày màu hồng"
+              width={700}
+              height={700}
+              sizes="(max-width: 767px) 100vw, 52vw"
+              preload
+            />
+            <div className="product-model-overlay">
+              <Heros3D hero />
+            </div>
+          </div>
+        </div>
+        <div className="product-stage-caption"><span>HEROS / HỒNG PHẤN</span><span>38 × 62 × 16 mm</span></div>
+      </div>
     </div>
   </section>;
 }

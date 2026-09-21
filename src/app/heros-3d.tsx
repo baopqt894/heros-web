@@ -51,14 +51,15 @@ function Ring({ position, rotation = [0, 0, 0], radius = 0.25 }: { position: [nu
   </mesh>;
 }
 
-function Device() {
+function Device({ centerBody = false }: { centerBody?: boolean }) {
   const outline = useMemo(() => bodyOutline(), []);
   const loop = useMemo(() => {
     const shape = new Shape(); shape.absellipse(0, 0, 0.25, 1.31, 0, Math.PI * 2, false, 0);
     const hole = new Path(); hole.absellipse(0, 0, 0.195, 1.25, 0, Math.PI * 2, true, 0);
     shape.holes.push(hole); return shape;
   }, []);
-  return <group position={[-0.38, -0.15, 0]}>
+  // The body geometry is centered at x=0, z=0; the strap must not shift its pivot.
+  return <group position={[centerBody ? 0 : -0.38, -0.15, 0]}>
     <mesh position={[0, 0, -0.2]}>
       <extrudeGeometry args={[outline, { depth: 0.4, bevelEnabled: true, bevelSegments: 10, steps: 1, bevelSize: 0.17, bevelThickness: 0.2, curveSegments: 48 }]} />
       <meshPhysicalMaterial color="#f3b2c8" roughness={0.29} clearcoat={0.65} clearcoatRoughness={0.24} />
@@ -148,9 +149,11 @@ function ScrollDevice({ hero }: { hero: boolean }) {
   useFrame((_, delta) => {
     if (!group.current || !hero) return;
     group.current.rotation.y = MathUtils.damp(group.current.rotation.y, progress.current * Math.PI * 1.8, 5, delta);
-    group.current.rotation.z = MathUtils.damp(group.current.rotation.z, -0.08 + progress.current * 0.16, 5, delta);
   });
-  return <group ref={group}><Device /></group>;
+  return <group ref={group}>
+    {/* Rotate around the device body's centerline, independently of the strap. */}
+    <Device centerBody={hero} />
+  </group>;
 }
 
 export default function Heros3D({ hero = false }: { hero?: boolean }) {
@@ -167,7 +170,7 @@ export default function Heros3D({ hero = false }: { hero?: boolean }) {
   return <div ref={host} className={`heros-model ${hero ? "hero-model" : ""}`}>
     <div className="three-viewer" aria-label="Mô hình Heros 3D tương tác">
       <Suspense fallback={<div className="model-loading">Đang tải mô hình Heros…</div>}>
-        <Canvas frameloop={visible ? "always" : "never"} camera={{ position: [4.3, 1.8, 9.2], fov: 35 }} dpr={[1, 1.75]} gl={{ antialias: true, alpha: true }}>
+        <Canvas frameloop={visible ? "always" : "never"} camera={{ position: hero ? [0, 0, 10.3] : [4.3, 1.8, 9.2], fov: 35 }} dpr={[1, 1.75]} gl={{ antialias: true, alpha: true }}>
           {!hero && <CameraView view={view} />}
           <ambientLight intensity={0.65} />
           <directionalLight position={[3, 5, 5]} intensity={2} />
