@@ -1,0 +1,57 @@
+.landing-v2 .v2-scene-status {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 16px;
+  min-height: 140px;
+  padding: 24px;
+  color: #805363;
+  text-align: center;
+  pointer-events: none;
+}
+
+.landing-v2 .v2-scene-status p {
+  margin: 0;
+  max-width: 250px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.landing-v2 .v2-scene-status-spinner {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #eac2cd;
+  border-top-color: #b4476b;
+  border-radius: 50%;
+  animation: v2-scene-status-spin 1s linear infinite;
+}
+
+.landing-v2 .v2-scene-status-error button {
+  min-height: 44px;
+  min-width: 100px;
+  padding: 10px 20px;
+  border: 1px solid #dcb4c0;
+  border-radius: 999px;
+  background: #fff9f3;
+  color: #70364e;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.landing-v2 .v2-scene-status-error button:hover { background: #fcecf0; }
+.landing-v2 .v2-scene-status-error button:focus-visible { outline: 2px solid #b4476b; outline-offset: 4px; }
+
+@keyframes v2-scene-status-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-v2 .v2-scene-status-spinner { animation: none; }
+}
+
+.landing-v2[data-motion="off"] .v2-scene-status-spinner { animation: none; }

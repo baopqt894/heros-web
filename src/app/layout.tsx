@@ -16,6 +16,7 @@ import "./brand.css";
 import { AccountSession } from "./account-session";
 import { Navigation } from "./interactive";
 import { SiteFooter } from "./site-chrome";
+import SiteFrame from "./site-frame";
 export const metadata: Metadata = {
   title: "Heros — Vì bạn xứng đáng được quan tâm",
   description:
@@ -32,9 +33,9 @@ export default function RootLayout({
           <a href="#main" className="skip-link">
             Đến nội dung chính
           </a>
-          <Navigation />
-          {children}
-          <SiteFooter />
+          <SiteFrame navigation={<Navigation />} footer={<SiteFooter />}>
+            {children}
+          </SiteFrame>
         </AccountSession>
       </body>
     </html>

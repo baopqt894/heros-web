@@ -17,6 +17,7 @@
 .hero-model{height:100%;min-height:0;width:100%}
 .hero-model .three-viewer{height:100%;margin:0!important;border-radius:0;background:transparent!important}
 .hero-model .three-viewer canvas{touch-action:pan-y!important}
+.heros-model .three-viewer>p{bottom:12px;padding:6px 12px}
 .product-stage-caption{display:flex;justify-content:space-between;gap:16px;padding:0 32px 32px;font-size:9px;letter-spacing:.12em;color:#a47788}
 .product-detail-copy{padding-right:40px;scroll-margin-top:35px}
 .product-detail-copy h2{font-size:clamp(40px,4.4vw,64px);line-height:1.16;margin:10px 0 25px}

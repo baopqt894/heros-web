@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/v1", destination: "/", permanent: true },
-      { source: "/v2", destination: "/", permanent: true },
     ];
   },
   turbopack: {

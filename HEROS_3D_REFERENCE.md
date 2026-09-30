@@ -1,11 +1,23 @@
 # Tham chiếu dựng model Heros
 
-- Ảnh: `public/images/heros-four-views.png`.
-- Tạo bằng imagegen tích hợp, chế độ chỉnh sửa dựa trên ảnh `public/images/heros-product.png`, trước khi dựng lại model.
-- Bốn góc: trước, bên phải, sau, nghiêng. Mặt sau là phần phác dựng, chưa có ảnh chụp thực tế xác nhận.
-- Model WebGL: `src/app/heros-3d.tsx`. Thân lấy tỷ lệ 38 × 62 × 16 mm từ tài liệu người dùng; nút nổi, logo, đèn, khoen bạc và vòng dây đeo dựng bằng geometry. Logo dùng ảnh thương hiệu gốc làm texture. Đây là mô hình minh họa, không phải CAD sản xuất.
-- Truy cập `/v2#heros-3d`; chọn góc hoặc kéo để xoay. Mở “Xem bản tham chiếu 4 góc” để đối chiếu.
+Model tương tác dùng chung cho trang chủ và `/san-pham`, với hình học ở `src/app/heros-geometry.ts`, lắp ráp ở `src/app/heros-device.tsx`, vật liệu ở `src/app/heros-materials.ts` và ánh sáng/góc nhìn ở `src/app/heros-3d.tsx`.
 
-## Prompt tạo ảnh
+## Cơ sở hình ảnh
 
-Create a precise premium industrial-design four-view reference sheet of the HEROS pink personal safety device in the supplied image. A clean 2x2 grid on warm white, same scale in each quadrant: FRONT, RIGHT SIDE, BACK, THREE-QUARTER. Reproduce this exact product: softly convex capsule/oval pebble body 62mm tall 38mm wide 16mm thick, blush satin pink shell with subtle perimeter seam, short vertical silver gray indicator above a raised circular rose pink rim button, pale pink button face with shield woman emblem, HEROS pink wordmark below. Realistic polished SILVER interlocking keyrings physically attached to pink top eyelet, pink wide flat wrist loop with silver snap and HEROS lettering. No floating rings. Side view shows thickness and button protrusion; infer a plain smooth rear with subtle seam and no invented controls, screen, speaker holes or regulatory text. All four views must be same consistent object, mechanically plausible curved closed wrist strap loop, photorealistic PBR studio rendering with soft shadow. Preserve logo appearance. No dimensions or extra marketing copy; only discreet English view labels. This is a modeling reference, not a website.
+Lần chỉnh này đối chiếu bộ bốn ảnh được tạo riêng từ ảnh sản phẩm người dùng: mặt trước, mặt sau, cạnh trái và góc phải. Ảnh mặt trước được lưu tại `public/images/heros-product-reference-v2.png`; logo khiên và chữ HEROS lấy trực tiếp từ ảnh này, dùng mặt nạ màu để tách mực khỏi ánh sáng đã có trong ảnh. Cùng một mẫu logo được dùng nhất quán trên thân và dây vì chữ/logo trong các ảnh AI khác nhau có sai khác.
+
+Tỷ lệ rộng/cao của thân là 38/62. Chiều dày được hiệu chỉnh theo cạnh bên trong bộ ảnh, tương đương khoảng 22,4 mm với đơn vị hình học hiện tại. Đây là chiều dày suy ra từ hình ảnh, không phải số đo thiết bị; số 16 mm trong nội dung thông số hiện có chưa được xác nhận lại. Các ảnh không phải bộ ảnh trực giao đã hiệu chuẩn, nên model không phải CAD sản xuất và chưa thể chứng nhận khớp 100%.
+
+## Cấu trúc
+
+- Vỏ kín có mặt trước và sau cong liên tục; pháp tuyến giải tích, khe ráp mảnh ở giữa thân.
+- Viền nút kim loại hồng có bề mặt rộng, mặt nút hơi lồi, logo và chữ ôm bề mặt cong. Đèn chỉ báo có hình viên nhộng và nghiêng theo vỏ.
+- Khoen chính hình oval, các mắt nối vuông góc đan vào nhau; một bản nối dẹt ở đầu dây. Quai trên rộng có đường may.
+- Dây là dải da kín có tiết diện bo cạnh, đầu thu nhỏ, đinh tán xuyên, đường sơn cạnh và mũi chỉ 3D. Đáy dây gần ngang đáy thân.
+- Vân da liền mạch, vi nhám nhựa satin, vật liệu phản xạ ánh sáng môi trường. Các texture và geometry được giải phóng khi tháo model.
+
+Không hiển thị bảng ảnh tham chiếu, trình xuất ảnh hoặc đường dẫn tải PNG trong giao diện sản phẩm.
+
+## Kiểm tra
+
+`npm run check`, `npm test`, `npm run build`. Bộ kiểm tra hình học xác nhận chiều cong, pháp tuyến, số liên kết của các khoen, khe hở kim loại/da/thân, hướng bề mặt và vị trí đáy dây. Kiểm tra trình duyệt bao gồm trước, sau, cạnh bên, góc nghiêng và từ trên.
