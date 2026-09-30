@@ -2,7 +2,7 @@
 .product-story-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:32px;align-items:start}
 .product-intro,.product-detail-copy{min-height:calc(100svh - 100px);display:flex;flex-direction:column;justify-content:center;padding:72px 0}
 .product-intro .chapter-label{font-size:11px;letter-spacing:.14em;color:#995169;margin-bottom:30px}
-.product-intro h1{font-size:clamp(48px,5.1vw,76px);line-height:1.14;letter-spacing:-.06em;margin:0 0 28px;color:#38252d}
+.product-intro h1{font-size:clamp(36px,4vw,56px);line-height:1.2;letter-spacing:-.06em;margin:0 0 28px;color:#38252d}
 .product-intro h1 span,.product-detail-copy h2 span{color:#ce4b7a}
 .product-intro-lead{font-size:16px;line-height:1.9;max-width:400px;color:#7b646c}
 .product-intro .hero-actions{justify-content:flex-start;gap:24px;margin-top:16px;flex-wrap:wrap}
@@ -38,10 +38,9 @@
 .sos-demo.is-active .sos-ripples i{animation:sos-wave 1.5s ease-out infinite}.sos-demo.is-active .sos-ripples i:nth-child(2){animation-delay:.35s}.sos-demo.is-active .sos-ripples i:nth-child(3){animation-delay:.7s}
 @keyframes sos-wave{from{transform:scale(.9);opacity:1}to{transform:scale(1.9);opacity:0}}
 .lifestyle{background:#fffbfc}
-.lifestyle-heading{display:flex;justify-content:space-between;gap:50px;align-items:flex-end;margin-bottom:65px}
-.lifestyle-heading h2{font-size:clamp(38px,4.5vw,65px);line-height:1.17;margin:0}
-.lifestyle-heading h2 span{color:#ce4b7a}
-.lifestyle-heading>p{max-width:270px;font-size:14px;line-height:1.8;color:#886d78;margin:0 0 6px}
+.lifestyle-heading{display:flex;flex-direction:column;gap:20px;align-items:flex-start;margin-bottom:48px}
+.lifestyle-heading h2{font-size:clamp(24px,3.1vw,42px);line-height:1.25;margin:0;white-space:nowrap}
+.lifestyle-heading>p{max-width:560px;font-size:14px;line-height:1.8;color:#886d78;margin:0}
 .lifestyle-grid{display:grid;grid-template-columns:1.12fr 1fr 1fr;gap:25px;align-items:start}
 .lifestyle-item:nth-child(2){padding-top:80px}.lifestyle-item:nth-child(3){padding-top:35px}
 .lifestyle-item figure{margin:0}.lifestyle-photo{overflow:hidden;border-radius:16px;aspect-ratio:4/5}
@@ -50,9 +49,6 @@
 .lifestyle-item figcaption{padding-top:23px}.lifestyle-item figcaption>span{font-size:9px;letter-spacing:.13em;color:#b06883}
 .lifestyle-item h3{font-size:21px;line-height:1.4;margin:12px 0 9px;letter-spacing:-.04em}.lifestyle-item p{font-size:13px;line-height:1.8;color:#8a7580;max-width:310px}
 .lifestyle-note{font-size:10px;color:#ad939d;margin:35px 0 0}
-@media(min-width:768px) and (max-width:1000px){.product-story-grid{gap:0;grid-template-columns:1.1fr 1fr}.product-intro h1{font-size:48px}.product-intro .hero-actions{gap:16px}.product-detail-copy{padding-right:0}}
-@media(max-width:767px){.product-story-grid{display:flex;flex-direction:column;gap:0}.product-story-copy{display:contents}.product-intro{order:0;min-height:0;padding:54px 8px 0}.product-intro h1{font-size:clamp(40px,10.8vw,58px);margin-bottom:20px}.product-intro .chapter-label{margin-bottom:24px;font-size:9px}.product-intro-lead{font-size:14px;line-height:1.8}.product-intro .hero-actions{gap:18px;margin-top:9px}.scroll-invitation{margin-top:30px}.product-sticky-stage{order:1;position:relative;top:auto;height:490px;min-height:0;width:100%}.product-stage-caption{padding:0 10px 20px;font-size:8px}.product-detail-copy{order:2;min-height:0;padding:50px 8px 70px}.product-detail-copy h2{font-size:42px}.product-measures{gap:35px}.lifestyle-heading{display:block;margin-bottom:35px}.lifestyle-heading>p{margin-top:24px;max-width:310px}.lifestyle-grid{grid-template-columns:1fr;gap:35px}.lifestyle-item:nth-child(n){padding-top:0}.lifestyle-photo{aspect-ratio:4/5}.lifestyle-item figcaption{padding-top:18px}.lifestyle-item h3{font-size:24px}.lifestyle-item p{max-width:none}.sos-demo-button{height:150px;width:150px}.sos-demo{min-height:285px;padding-top:12px}.sos-ripples{top:8px;width:160px;height:160px}}
+@media(min-width:768px) and (max-width:1000px){.product-story-grid{gap:0;grid-template-columns:1.1fr 1fr}.product-intro h1{font-size:36px}.product-intro .hero-actions{gap:16px}.product-detail-copy{padding-right:0}}
+@media(max-width:767px){.product-story-grid{display:flex;flex-direction:column;gap:0}.product-story-copy{display:contents}.product-intro{order:0;min-height:0;padding:54px 8px 0}.product-intro h1{font-size:clamp(40px,10.8vw,58px);margin-bottom:20px}.product-intro .chapter-label{margin-bottom:24px;font-size:9px}.product-intro-lead{font-size:14px;line-height:1.8}.product-intro .hero-actions{gap:18px;margin-top:9px}.scroll-invitation{margin-top:30px}.product-sticky-stage{order:1;position:relative;top:auto;height:490px;min-height:0;width:100%}.product-stage-caption{padding:0 10px 20px;font-size:8px}.product-detail-copy{order:2;min-height:0;padding:50px 8px 70px}.product-detail-copy h2{font-size:42px}.product-measures{gap:35px}.lifestyle-heading{display:block;margin-bottom:35px}.lifestyle-heading h2{font-size:28px;white-space:normal}.lifestyle-heading>p{margin-top:24px;max-width:310px}.lifestyle-grid{grid-template-columns:1fr;gap:35px}.lifestyle-item:nth-child(n){padding-top:0}.lifestyle-photo{aspect-ratio:4/5}.lifestyle-item figcaption{padding-top:18px}.lifestyle-item h3{font-size:24px}.lifestyle-item p{max-width:none}.sos-demo-button{height:150px;width:150px}.sos-demo{min-height:285px;padding-top:12px}.sos-ripples{top:8px;width:160px;height:160px}}
 @media(prefers-reduced-motion:reduce){.sos-demo.is-active .sos-ripples i{animation:none}.lifestyle-photo img,.sos-demo-button{transition:none}}
-.faq-heading h2 {
-   font-size: clamp(28px, 5vw, 64px);
-}

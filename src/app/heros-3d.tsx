@@ -148,7 +148,8 @@ function ScrollDevice({ hero }: { hero: boolean }) {
   }, [hero]);
   useFrame((_, delta) => {
     if (!group.current || !hero) return;
-    group.current.rotation.y = MathUtils.damp(group.current.rotation.y, progress.current * Math.PI * 1.8, 5, delta);
+    group.current.rotation.y = MathUtils.damp(group.current.rotation.y, progress.current * Math.PI * 2, 5, delta);
+    group.current.rotation.z = MathUtils.damp(group.current.rotation.z, -0.08 + progress.current * 0.16, 5, delta);
   });
   return <group ref={group}>
     {/* Rotate around the device body's centerline, independently of the strap. */}
@@ -182,7 +183,7 @@ export default function Heros3D({ hero = false }: { hero?: boolean }) {
           </Environment>
           <ScrollDevice hero={hero} />
           <ContactShadows position={[0, -1.87, 0]} opacity={0.25} scale={10} blur={2.8} far={5} resolution={256} frames={1} />
-          {!hero && <OrbitControls target={[0, 0.2, 0]} enablePan={false} enableZoom={false} minPolarAngle={0.3} maxPolarAngle={Math.PI - 0.3} />}
+          {<OrbitControls target={[0, 0.2, 0]} enablePan={false} enableZoom={false} minPolarAngle={0.3} maxPolarAngle={Math.PI - 0.3} />}
         </Canvas>
       </Suspense>
       {!hero && <p>Kéo để xoay và ngắm từng chi tiết</p>}

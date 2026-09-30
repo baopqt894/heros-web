@@ -9,10 +9,17 @@ import "@fontsource/be-vietnam-pro/latin-500.css";
 import "@fontsource/be-vietnam-pro/latin-600.css";
 import "@fontsource/be-vietnam-pro/latin-700.css";
 import "./globals.css";
+import "./site-pages.css";
+import "./product-experience.css";
+import "./commerce.css";
+import "./brand.css";
+import { AccountSession } from "./account-session";
+import { Navigation } from "./interactive";
+import { SiteFooter } from "./site-chrome";
 export const metadata: Metadata = {
-  title: "Heros — An tâm bên bạn. Tự do là mình.",
+  title: "Heros — Vì bạn xứng đáng được quan tâm",
   description:
-    "Khám phá câu chuyện Heros, thiết bị SOS nhỏ gọn kết nối những người bạn thương. Trải nghiệm đặt hàng demo.",
+    "Khám phá câu chuyện Heros, thiết bị SOS nhỏ gọn kết nối những người bạn thương. Khám phá sản phẩm và kết nối cùng Heros.",
   icons: { icon: "/images/heros-logo.png" },
 };
 export default function RootLayout({
@@ -20,7 +27,16 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="vi">
-      <body>{children}</body>
+      <body>
+        <AccountSession>
+          <a href="#main" className="skip-link">
+            Đến nội dung chính
+          </a>
+          <Navigation />
+          {children}
+          <SiteFooter />
+        </AccountSession>
+      </body>
     </html>
   );
 }
