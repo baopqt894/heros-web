@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -11,9 +11,17 @@ import { useAccount } from "./account-session";
 export default function AuthForm({
   onComplete,
   compact = false,
+  checkout = false,
+  initialEmail = "",
+  initialName = "",
+  onBusyChange,
 }: {
   onComplete?: () => void;
   compact?: boolean;
+  checkout?: boolean;
+  initialEmail?: string;
+  initialName?: string;
+  onBusyChange?: (busy: boolean) => void;
 }) {
   const { reload } = useAccount();
   const [mode, setMode] = useState<"login" | "register" | "recover">("login");
@@ -23,6 +31,12 @@ export default function AuthForm({
     [recovery, setRecovery] = useState(""),
     [saved, setSaved] = useState(false),
     [email, setEmail] = useState("");
+  const [loginEmail, setLoginEmail] = useState(initialEmail);
+  const [name, setName] = useState(initialName);
+  useEffect(() => {
+    onBusyChange?.(busy);
+    return () => onBusyChange?.(false);
+  }, [busy, onBusyChange]);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy) return;
@@ -100,7 +114,8 @@ export default function AuthForm({
             setBusy(false);
           }}
         >
-          Tiếp tục <ArrowRight size={18} />
+          {checkout ? "Tiếp tục xem lại đơn" : "Tiếp tục"}{" "}
+          <ArrowRight size={18} />
         </button>
       </section>
     );
@@ -110,6 +125,7 @@ export default function AuthForm({
         <button
           type="button"
           className={mode === "login" ? "active" : ""}
+          disabled={busy}
           onClick={() => {
             setMode("login");
             setError("");
@@ -120,6 +136,7 @@ export default function AuthForm({
         <button
           type="button"
           className={mode === "register" ? "active" : ""}
+          disabled={busy}
           onClick={() => {
             setMode("register");
             setError("");
@@ -138,7 +155,9 @@ export default function AuthForm({
       <p>
         {mode === "recover"
           ? "Dùng mã khôi phục đã lưu khi tạo tài khoản."
-          : "Lịch sử mua hàng luôn ở đây, kể cả khi bạn đổi điện thoại hoặc quên mã đơn."}
+          : checkout
+            ? "Đăng nhập để lưu và tra cứu đơn sau này. Thông tin nhận hàng của bạn vẫn được giữ nguyên."
+            : "Lịch sử mua hàng luôn ở đây, kể cả khi bạn đổi điện thoại hoặc quên mã đơn."}
       </p>
       <form onSubmit={submit} key={mode}>
         {mode === "register" && (
@@ -146,6 +165,8 @@ export default function AuthForm({
             Tên của bạn
             <input
               name="name"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
               required
               minLength={2}
               maxLength={100}
@@ -159,6 +180,8 @@ export default function AuthForm({
           <input
             type="email"
             name="email"
+            value={loginEmail}
+            onChange={(event) => setLoginEmail(event.target.value)}
             autoComplete="username"
             required
             maxLength={254}
@@ -184,6 +207,7 @@ export default function AuthForm({
             <input
               type={show ? "text" : "password"}
               name="password"
+              aria-label={mode === "recover" ? "Mật khẩu mới" : "Mật khẩu"}
               autoComplete={
                 mode === "login" ? "current-password" : "new-password"
               }
@@ -210,9 +234,13 @@ export default function AuthForm({
           {busy
             ? "Đang xử lý…"
             : mode === "login"
-              ? "Đăng nhập"
+              ? checkout
+                ? "Đăng nhập & tiếp tục"
+                : "Đăng nhập"
               : mode === "register"
-                ? "Tạo tài khoản"
+                ? checkout
+                  ? "Tạo tài khoản & tiếp tục"
+                  : "Tạo tài khoản"
                 : "Đặt lại mật khẩu"}
           <ArrowRight size={18} />
         </button>
@@ -221,6 +249,7 @@ export default function AuthForm({
         <button
           type="button"
           className="auth-help"
+          disabled={busy}
           onClick={() => {
             setMode("recover");
             setError("");

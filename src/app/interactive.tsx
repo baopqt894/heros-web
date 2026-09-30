@@ -119,7 +119,7 @@ const money = (value: number) =>
     value,
   );
 export function Order({ enabled }: { enabled: boolean }) {
-  const { account, loading: accountLoading } = useAccount();
+  const { account, loading: accountLoading, reload } = useAccount();
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [method, setMethod] = useState<"payos" | "cod">("payos");
@@ -129,10 +129,15 @@ export function Order({ enabled }: { enabled: boolean }) {
     email: "",
     address: "",
   });
+  const [draft, setDraft] = useState<Partial<Customer>>({});
+  const [stage, setStage] = useState<"auth" | "review">("auth");
+  const [authStarted, setAuthStarted] = useState(false);
+  const [authBusy, setAuthBusy] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [pendingOrder, setPendingOrder] = useState<number | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
+  const dialogTitle = useRef<HTMLHeadingElement>(null);
   const requestId = useRef("");
   const fingerprint = useRef("");
   const submitting = useRef(false);
@@ -146,18 +151,37 @@ export function Order({ enabled }: { enabled: boolean }) {
       email: String(data.get("email")).trim(),
       address: String(data.get("address")).trim(),
     };
-    const key = JSON.stringify({ ...next, quantity, method });
+    const key = JSON.stringify({
+      ...next,
+      quantity,
+      method,
+      accountId: account?.id,
+    });
     if (fingerprint.current !== key) {
       requestId.current = crypto.randomUUID();
       fingerprint.current = key;
       setPendingOrder(null);
     }
     setCustomer(next);
+    setDraft(next);
     setError("");
+    setStage(account ? "review" : "auth");
+    if (!account) setAuthStarted(true);
     dialog.current?.showModal();
   }
   async function confirm() {
     if (submitting.current || !enabled || !account) return;
+    const key = JSON.stringify({
+      ...customer,
+      quantity,
+      method,
+      accountId: account.id,
+    });
+    if (fingerprint.current !== key) {
+      requestId.current = crypto.randomUUID();
+      fingerprint.current = key;
+      setPendingOrder(null);
+    }
     submitting.current = true;
     setBusy(true);
     setError("");
@@ -176,6 +200,14 @@ export function Order({ enabled }: { enabled: boolean }) {
         order?: PublicOrder;
         error?: string;
       };
+      if (response.status === 401) {
+        await reload();
+        setAuthStarted(true);
+        setStage("auth");
+        throw new Error(
+          "Phiên đăng nhập đã hết hạn. Đăng nhập lại để tiếp tục; thông tin đơn vẫn được giữ nguyên.",
+        );
+      }
       if (result.order) {
         setPendingOrder(result.order.orderCode);
         try {
@@ -207,6 +239,12 @@ export function Order({ enabled }: { enabled: boolean }) {
       submitting.current = false;
     }
   }
+  useEffect(() => {
+    if (dialog.current?.open) {
+      dialog.current.scrollTop = 0;
+      dialogTitle.current?.focus();
+    }
+  }, [stage]);
   useEffect(() => {
     const element = dialog.current;
     if (!element) return;
@@ -255,25 +293,18 @@ export function Order({ enabled }: { enabled: boolean }) {
           </p>
         </div>
         <div className="checkout-column">
-          <div className="checkout-account">
-            <p className="document-label">01 / Tài khoản mua hàng</p>
-            {accountLoading ? (
-              <p>Đang kiểm tra tài khoản…</p>
-            ) : account ? (
-              <div className="checkout-signed-in">
-                <Check size={20} />
-                <span>
-                  Đặt hàng với <strong>{account.email}</strong>
-                  <small>Đơn hàng sẽ tự lưu vào tài khoản này.</small>
-                </span>
-                <Link href="/tai-khoan">Xem tài khoản</Link>
-              </div>
-            ) : (
-              <AuthForm compact />
-            )}
-          </div>
+          <ol className="checkout-progress" aria-label="Các bước đặt hàng">
+            <li aria-current="step">
+              <span>1</span>Nhận hàng
+            </li>
+            <li>
+              <span>2</span>Tài khoản
+            </li>
+            <li>
+              <span>3</span>Xác nhận
+            </li>
+          </ol>
           <form className="order-form" onSubmit={submit}>
-            <p className="document-label">02 / Sản phẩm & nhận hàng</p>
             <div className="form-heading">
               <h3>Heros của bạn</h3>
               <Heart size={23} />
@@ -312,8 +343,10 @@ export function Order({ enabled }: { enabled: boolean }) {
                 Họ và tên
                 <input
                   name="name"
-                  key={`name-${account?.id || "guest"}`}
-                  defaultValue={account?.name || ""}
+                  value={draft.name ?? account?.name ?? ""}
+                  onChange={(event) =>
+                    setDraft({ ...draft, name: event.target.value })
+                  }
                   autoComplete="name"
                   required
                   minLength={2}
@@ -326,6 +359,10 @@ export function Order({ enabled }: { enabled: boolean }) {
                 Số điện thoại
                 <input
                   name="phone"
+                  value={draft.phone ?? ""}
+                  onChange={(event) =>
+                    setDraft({ ...draft, phone: event.target.value })
+                  }
                   type="tel"
                   autoComplete="tel"
                   required
@@ -338,8 +375,10 @@ export function Order({ enabled }: { enabled: boolean }) {
                 Email
                 <input
                   name="email"
-                  key={`email-${account?.id || "guest"}`}
-                  defaultValue={account?.email || ""}
+                  value={draft.email ?? account?.email ?? ""}
+                  onChange={(event) =>
+                    setDraft({ ...draft, email: event.target.value })
+                  }
                   type="email"
                   autoComplete="email"
                   required
@@ -351,6 +390,10 @@ export function Order({ enabled }: { enabled: boolean }) {
                 Địa chỉ nhận hàng
                 <textarea
                   name="address"
+                  value={draft.address ?? ""}
+                  onChange={(event) =>
+                    setDraft({ ...draft, address: event.target.value })
+                  }
                   autoComplete="street-address"
                   required
                   minLength={10}
@@ -410,14 +453,22 @@ export function Order({ enabled }: { enabled: boolean }) {
             <button
               className="button submit"
               type="submit"
-              disabled={!account || accountLoading}
+              disabled={!enabled || busy || accountLoading}
             >
-              {account ? "Xem lại đơn hàng" : "Đăng nhập ở trên để tiếp tục"}
+              {!enabled
+                ? "Sắp mở bán"
+                : accountLoading
+                  ? "Đang chuẩn bị…"
+                  : account
+                    ? "Xem lại đơn hàng"
+                    : "Tiếp tục mua hàng"}
               <ArrowRight size={20} />
             </button>
             <p className="form-note">
               <ShieldCheck size={16} />
-              Kiểm tra thông tin trước khi xác nhận.
+              {account
+                ? "Bạn sẽ kiểm tra lại đơn trước khi xác nhận."
+                : "Bạn sẽ đăng nhập ở bước tiếp theo để lưu và tra cứu đơn."}
             </p>
           </form>
         </div>
@@ -427,72 +478,158 @@ export function Order({ enabled }: { enabled: boolean }) {
         className="checkout-dialog"
         aria-labelledby="checkout-title"
         onCancel={(event) => {
-          if (busy) event.preventDefault();
+          if (busy || authBusy) event.preventDefault();
         }}
       >
         <button
           className="close-dialog"
           aria-label="Đóng thanh toán"
-          disabled={busy}
+          disabled={busy || authBusy}
           onClick={() => dialog.current?.close()}
         >
           <X size={23} />
         </button>
-        <h2 id="checkout-title">Một chút nữa thôi.</h2>
-        <p>Kiểm tra thông tin trước khi đặt hàng.</p>
-        <div className="review-box">
-          <strong>{customer.name}</strong>
-          <span>
-            {customer.phone} · {customer.email}
-          </span>
-          <span>{customer.address}</span>
-        </div>
-        <div className="total-row">
-          <span>Heros hồng phấn × {quantity}</span>
+        <ol className="checkout-progress" aria-label="Tiến trình thanh toán">
+          <li className="is-complete">
+            <span>
+              <Check size={13} />
+            </span>
+            Nhận hàng
+          </li>
+          <li
+            aria-current={stage === "auth" ? "step" : undefined}
+            className={stage === "review" ? "is-complete" : ""}
+          >
+            <span>2</span>Tài khoản
+          </li>
+          <li aria-current={stage === "review" ? "step" : undefined}>
+            <span>3</span>Xác nhận
+          </li>
+        </ol>
+        <h2 id="checkout-title" ref={dialogTitle} tabIndex={-1}>
+          {stage === "auth"
+            ? "Lưu đơn, để dễ tìm lại."
+            : "Kiểm tra lần cuối nhé."}
+        </h2>
+        <div className="checkout-cart-preview">
+          <Image
+            src="/images/heros-product.png"
+            alt=""
+            width={56}
+            height={56}
+          />
+          <div>
+            <strong>Heros · Hồng phấn</strong>
+            <span>Số lượng {quantity} · Miễn phí giao hàng</span>
+          </div>
           <strong>{money(total)}</strong>
         </div>
-        <p>
-          {method === "payos"
-            ? "Bạn sẽ được chuyển đến payOS để quét QR. Đơn chỉ được xác nhận đã thanh toán sau khi payOS ghi nhận tiền."
-            : "Heros sẽ tiếp nhận đơn COD. Bạn thanh toán khi nhận hàng."}
-        </p>
-        {!enabled && (
-          <p className="pending-note">
-            Heros chưa mở tiếp nhận đơn hàng. Vui lòng quay lại sau.
-          </p>
-        )}
         {error && (
           <p role="alert" className="form-error">
             {error}
           </p>
         )}
-        <button
-          className="button submit"
-          disabled={busy || !enabled || !account || Boolean(pendingOrder)}
-          onClick={confirm}
-        >
-          {busy
-            ? "Đang tạo đơn…"
-            : method === "payos"
-              ? "Đến payOS thanh toán"
-              : "Xác nhận đơn COD"}
-          <Check size={20} />
-        </button>
-        {pendingOrder && (
-          <Link
-            className="order-saved"
-            href={`/thanh-toan?orderCode=${pendingOrder}`}
-          >
-            Kiểm tra đơn #{pendingOrder}
-          </Link>
+        {stage === "auth" ? (
+          authStarted && (
+            <AuthForm
+              compact
+              checkout
+              initialEmail={customer.email}
+              initialName={customer.name}
+              onBusyChange={setAuthBusy}
+              onComplete={() => {
+                setError("");
+                setStage("review");
+              }}
+            />
+          )
+        ) : (
+          <>
+            <div className="checkout-owner">
+              <Check size={18} />
+              <span>
+                Đơn sẽ lưu trong tài khoản <strong>{account?.email}</strong>
+              </span>
+            </div>
+            <div className="review-box">
+              <span className="document-label">Gửi đến</span>
+              <strong>{customer.name}</strong>
+              <span>
+                {customer.phone} · {customer.email}
+              </span>
+              <span>{customer.address}</span>
+            </div>
+            <div className="total-row">
+              <span>Phương thức</span>
+              <strong>
+                {method === "payos"
+                  ? "Chuyển khoản qua payOS"
+                  : "Thanh toán khi nhận hàng"}
+              </strong>
+            </div>
+            <div className="grand-total">
+              <strong>Tổng thanh toán</strong>
+              <strong>{money(total)}</strong>
+            </div>
+            <p>
+              {method === "payos"
+                ? "Sau khi xác nhận, bạn sẽ chuyển đến payOS để quét QR thanh toán."
+                : "Bạn thanh toán cho đơn vị giao hàng khi nhận được Heros."}
+            </p>
+            {!enabled && (
+              <p className="pending-note">
+                Heros chưa mở tiếp nhận đơn hàng. Vui lòng quay lại sau.
+              </p>
+            )}
+            {!account && (
+              <p role="alert" className="form-error">
+                Chưa xác nhận được phiên đăng nhập. Vui lòng đăng nhập lại.
+              </p>
+            )}
+            {account ? (
+              <button
+                className="button submit"
+                disabled={busy || !enabled || Boolean(pendingOrder)}
+                onClick={confirm}
+              >
+                {busy
+                  ? "Đang tạo đơn…"
+                  : method === "payos"
+                    ? "Xác nhận & đến payOS"
+                    : "Xác nhận đặt hàng COD"}
+                <ArrowRight size={20} />
+              </button>
+            ) : (
+              <button
+                className="button submit"
+                onClick={() => {
+                  setAuthStarted(true);
+                  setStage("auth");
+                }}
+              >
+                Đăng nhập lại
+              </button>
+            )}
+            {pendingOrder && (
+              <Link
+                className="order-saved"
+                href={`/thanh-toan?orderCode=${pendingOrder}`}
+              >
+                Kiểm tra đơn #{pendingOrder}
+              </Link>
+            )}
+          </>
         )}
         <button
-          className="text-button"
-          disabled={busy}
+          className="text-button checkout-back"
+          disabled={busy || authBusy}
           onClick={() => dialog.current?.close()}
         >
-          Quay lại chỉnh sửa
+          Quay lại thông tin nhận hàng
         </button>
+        <p className="checkout-reassurance">
+          Thông tin đã điền được giữ nguyên. Đơn chỉ được tạo khi bạn xác nhận.
+        </p>
       </dialog>
     </section>
   );

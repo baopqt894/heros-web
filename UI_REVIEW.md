@@ -20,9 +20,9 @@
 
 ## Luồng mua hàng và quay lại
 
-1. Chọn số lượng, đăng nhập hoặc tạo tài khoản email/mật khẩu.
-2. Tài khoản mới lưu mã khôi phục dùng một lần.
-3. Điền người nhận, chọn payOS hoặc COD. Server tính 590.000đ × số lượng, miễn phí giao hàng, lưu đơn gắn tài khoản trước khi chuyển thanh toán.
+1. Chọn số lượng, điền người nhận và chọn payOS hoặc COD; chưa yêu cầu đăng nhập.
+2. Bấm “Tiếp tục mua hàng” mới đăng nhập/tạo tài khoản trong hộp thoại; giữ nguyên thông tin người nhận. Tài khoản mới lưu mã khôi phục dùng một lần.
+3. Xem lại và xác nhận đơn. Server tính 590.000đ × số lượng, miễn phí giao hàng, lưu đơn gắn tài khoản trước khi chuyển thanh toán.
 4. Trang kết quả đối chiếu trạng thái server, hiển thị phiếu xác nhận đơn và nút In / Lưu PDF. COD không được ghi là đã trả tiền.
 5. Quay lại “Tài khoản” trên thiết bị bất kỳ, đăng nhập và xem lịch sử không cần mã đơn.
 6. Đơn khách cũ chỉ được gắn khi còn cookie hợp lệ và email tài khoản trùng đơn; mất cookie cần hỗ trợ xác minh thủ công. Không mở tra cứu thông tin cá nhân chỉ bằng email/số điện thoại/mã đơn.
@@ -34,4 +34,5 @@ Phiếu mua hàng không phải hóa đơn VAT. Chưa có email xác minh, email
 - `npm run check`, `npm test` (15/15), `npm run build`: qua.
 - Kiểm thử HTTP trên SQLite riêng: bắt buộc đăng nhập, giá do server tính, chống lặp, lịch sử qua phiên đăng nhập mới, chặn tài khoản khác, đăng xuất và khôi phục thu hồi phiên.
 - Kiểm tra trình duyệt desktop và mobile: trang về chúng tôi/6 thành viên, bộ tính năng/SOS, đăng nhập, lịch sử, chi tiết đơn. Không dùng đơn thật để thực hiện kiểm thử có ghi dữ liệu.
+- Luồng mua hàng cập nhật: form trống bị chặn trước đăng nhập; nhập sai mật khẩu không mất thông tin; chuyển đăng ký giữ tên/email; đăng nhập không tự tạo đơn; quay lại sửa giữ người nhận, số lượng và phương thức; phiên hết hạn quay về đăng nhập; hoàn tất đúng một đơn COD trên database QA riêng, email người nhận khác email tài khoản vẫn được giữ đúng. Hộp thoại đã kiểm tra ở 390px và desktop.
 - Chưa triển khai lên tên miền công khai. Các link App Store/Google Play và điều khoản vẫn cần chủ thương hiệu cung cấp.

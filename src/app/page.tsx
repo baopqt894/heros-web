@@ -18,7 +18,7 @@ const faqs = [
   ],
   [
     "Mình có thể đặt hàng ngay không?",
-    "Bạn đăng nhập hoặc tạo tài khoản, điền thông tin nhận hàng và xem lại đơn. Chọn chuyển khoản qua payOS hoặc thanh toán khi nhận hàng. Đơn được lưu trong tài khoản để bạn tìm lại bất cứ lúc nào.",
+    "Bạn chọn số lượng, điền thông tin nhận hàng và chọn cách thanh toán trước. Khi bấm tiếp tục mua hàng, bạn đăng nhập hoặc tạo tài khoản, xem lại rồi xác nhận đơn. Đơn được lưu trong tài khoản để bạn tìm lại bất cứ lúc nào.",
   ],
   [
     "Mình muốn mua Heros làm quà thì sao?",
