@@ -1125,20 +1125,36 @@
   }
 }
 
-/* Keep the story and everyday scenes on the same editorial grid. */
-#cau-chuyen.manifesto { padding: 48px 0 40px; background: #fffbfc; }
-#cau-chuyen .story-shell { max-width: none; width: min(1152px, calc(100% - 96px)); display: grid; grid-template-columns: .8fr 1.6fr; gap: 0 48px; padding-top: 32px; border-top: 1px solid #ead7df; }
-#cau-chuyen .chapter-label { grid-row: 1 / 3; margin-top: 8px; }
-#cau-chuyen h2 { font-size: clamp(28px, 3vw, 40px); margin: 0 0 18px; }
-#cau-chuyen .manifesto-body { font-size: 14px; line-height: 1.85; max-width: 640px; }
+/* A familiar message gives the brand story a quiet, personal setting. */
+#cau-chuyen.manifesto { padding: 40px 0; background: #fffbfc; }
+#cau-chuyen .story-shell { max-width: none; width: min(1152px, calc(100% - 96px)); display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; padding: 48px 56px; border: 0; border-radius: 28px; background: #f9e9ef; overflow: hidden; }
+#cau-chuyen .chapter-label { margin: 0 0 24px; color: #a3486b; font-size: 11px; }
+#cau-chuyen h2 { font-size: clamp(32px, 3.5vw, 46px); line-height: 1.16; letter-spacing: -.055em; margin: 0 0 24px; color: #50303e; }
+#cau-chuyen h2 span { color: #c44878; }
+#cau-chuyen .manifesto-body { font-size: 13px; line-height: 1.95; max-width: 465px; color: #806372; margin: 0; }
+.story-message-scene { position: relative; min-width: 0; height: 320px; display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 48px 4px 20px; }
+.story-message-orbit { position: absolute; width: 290px; height: 290px; border: 1px solid #e8cbd7; border-radius: 50%; top: 6px; left: 50%; transform: translateX(-50%); }
+.story-message-orbit::after { content: ""; position: absolute; inset: 24px; border: 1px dashed #e8cbd7; border-radius: inherit; }
+.story-care-mark { position: absolute; top: 0; left: 50%; transform: translateX(-50%) rotate(-8deg); display: grid; place-items: center; width: 76px; height: 76px; border-radius: 24px; background: #fff7fa; box-shadow: 0 8px 24px #9b456010; }
+.story-bubble { position: relative; display: flex; align-items: center; gap: 16px; width: fit-content; padding: 22px 28px; font-size: clamp(16px, 1.5vw, 20px); font-weight: 500; letter-spacing: -.025em; box-shadow: 0 12px 28px -16px #914f6e45; }
+.story-bubble-home { align-self: flex-start; border-radius: 20px 20px 20px 5px; background: #fffcfd; color: #684455; transform: rotate(-5deg); }
+.story-message-dot { width: 7px; height: 7px; border-radius: 50%; background: #c5668b; box-shadow: 0 0 0 5px #f7e8ee; }
+.story-bubble-reply { align-self: flex-end; border-radius: 20px 20px 5px 20px; background: #eac2d2; color: #72334f; transform: rotate(4deg); }
+.story-message-note { position: absolute; bottom: 0; left: 0; right: 0; text-align: center; font-size: 10px; color: #a17b8c; }
 #theo-cach-cua-ban { padding-top: 40px; }
 #theo-cach-cua-ban .wide-shell { width: min(1152px, calc(100% - 96px)); }
 #theo-cach-cua-ban .lifestyle-heading { gap: 14px; margin-bottom: 32px; }
 #theo-cach-cua-ban .lifestyle-heading h2 { font-size: clamp(24px, 2.65vw, 36px); }
 @media (max-width: 760px) {
   #cau-chuyen.manifesto { padding: 28px 0; }
-  #cau-chuyen .story-shell { width: calc(100% - 36px); display: block; padding-top: 28px; }
-  #cau-chuyen h2 { font-size: 29px; }
+  #cau-chuyen .story-shell { width: calc(100% - 36px); grid-template-columns: 1fr; gap: 26px; padding: 30px 24px; border-radius: 22px; }
+  #cau-chuyen h2 { font-size: 36px; margin-bottom: 20px; }
+  #cau-chuyen .chapter-label { margin-bottom: 20px; }
+  .story-message-scene { height: 270px; padding-top: 48px; }
+  .story-message-orbit { width: 240px; height: 240px; }
+  .story-care-mark { width: 60px; height: 60px; border-radius: 20px; }
+  .story-care-mark svg { width: 38px; }
+  .story-bubble { padding: 17px 20px; font-size: 16px; }
   #cau-chuyen .manifesto-body { font-size: 13px; }
   #theo-cach-cua-ban { padding-top: 28px; }
   #theo-cach-cua-ban .wide-shell { width: calc(100% - 36px); }

@@ -33,16 +33,29 @@ export default function Home() {
 
         <Connections />
 
-        <section id="cau-chuyen" className="manifesto section">
+        <section id="cau-chuyen" className="manifesto section" aria-labelledby="story-title">
           <Reveal className="story-shell">
-            <p className="chapter-label">Câu chuyện của chúng tớ</p>
-            <h2>Về đến nhà nhắn tớ nhé</h2>
-            <p className="manifesto-body">
-              Từ một câu nói quen thuộc, Heros biến sự quan tâm thành một kết
-              nối luôn ở bên bạn. Chúng tớ tin rằng cảm giác an tâm không nên
-              giữ bạn ở nhà. Nó nên cùng bạn đi học, đi làm, dạo phố và khám phá
-              những điều mới.
-            </p>
+            <div className="story-copy">
+              <p className="chapter-label">Câu chuyện của chúng tớ</p>
+              <h2 id="story-title">Về đến nhà<br />nhắn tớ nhé<span>.</span></h2>
+              <p className="manifesto-body">
+                Từ một câu nói quen thuộc, Heros biến sự quan tâm thành một kết
+                nối luôn ở bên bạn. Chúng tớ tin rằng cảm giác an tâm không nên
+                giữ bạn ở nhà. Nó nên cùng bạn đi học, đi làm, dạo phố và khám phá
+                những điều mới.
+              </p>
+            </div>
+            <div className="story-message-scene" role="img" aria-label="Minh họa lời nhắn quan tâm: Tớ về rồi. Ừ, nghỉ ngơi nhé.">
+              <div className="story-message-orbit" aria-hidden="true" />
+              <div className="story-care-mark" aria-hidden="true"><HerosIcon name="care" size={46} /></div>
+              <div className="story-bubble story-bubble-home" aria-hidden="true">
+                <span className="story-message-dot" />Tớ về rồi.
+              </div>
+              <div className="story-bubble story-bubble-reply" aria-hidden="true">
+                Ừ, nghỉ ngơi nhé.<HerosIcon name="care" size={24} />
+              </div>
+              <span className="story-message-note" aria-hidden="true">Một lời nhắn. Thêm một chút an tâm.</span>
+            </div>
           </Reveal>
         </section>
 
