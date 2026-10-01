@@ -1,5 +1,11 @@
 # Đối chiếu góp ý website Heros — 30/09/2026
 
+## Cập nhật chọn lọc từ baolt — 01/10/2026
+
+- Đưa riêng mục “02 / KẾT NỐI LÀ MỘT CÁCH QUAN TÂM” lên trang chủ main, thay nhóm thẻ tính năng cũ. Có 4 minh họa SOS, định vị, ghi âm và người thân; tự chuyển sau 3,5 giây thay vì 6,5 giây. Giữ chọn thủ công, tạm dừng và điều hướng bàn phím.
+- Sao chép model sản phẩm, vật liệu, logo bám theo bề mặt, texture và các kiểm thử hình học từ baolt. Model dùng chung cho trang chủ và trang sản phẩm; không đưa toàn bộ landing page v2 hoặc routing của baolt sang main.
+- Xác minh: lint, TypeScript, build và 25 kiểm thử đều qua; kiểm tra trình duyệt về hiển thị, tự chuyển tính năng và điều hướng bàn phím.
+
 Đã đọc lại nội dung và bình luận của cả 5 tab trong tài liệu [Góp ý giao diện web](https://docs.google.com/document/d/1bec0S4GsaUNjNsxfhqynu-bGPhmRHd4ADF-vf8wPFH8/edit), bao gồm ảnh bố cục tham khảo. Ảnh SafeHer/Lutech chỉ là tham khảo thiết kế; không dùng tên người, chức danh hoặc thông tin doanh nghiệp trong ảnh làm dữ liệu Heros.
 
 | Nguồn | Đối chiếu và kết quả |

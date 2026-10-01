@@ -1,11 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import Connections from "./connections/connections";
 import HerosIcon from "./heros-icon";
 import { checkoutEnabled } from "@/lib/payos";
 export const dynamic = "force-dynamic";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { ContactForm, Order, Reveal } from "./interactive";
-import { HerosHero, SosDemo } from "./product-experience";
+import { HerosHero } from "./product-experience";
 
 const faqs = [
   [
@@ -32,81 +31,7 @@ export default function Home() {
       <main id="main">
         <HerosHero />
 
-        <section
-          className="heros-features section"
-          aria-labelledby="highlights-title"
-        >
-          <div className="wide-shell">
-            <header className="feature-section-heading">
-              <div>
-                <p className="chapter-label">Một kết nối thật gần</p>
-                <h2 id="highlights-title">
-                  Khi bạn cần,
-                  <br />
-                  <span>Heros ở ngay đây.</span>
-                </h2>
-              </div>
-              <p>
-                Từ một lời cần giúp đến một vị trí được sẻ chia. Những điều nhỏ
-                để bạn và người thân gần nhau hơn.
-              </p>
-            </header>
-            <div className="brand-feature-grid">
-              <article className="brand-feature brand-feature-sos">
-                <div>
-                  <span className="feature-number">01 / SOS</span>
-                  <h3>Cần là có.</h3>
-                  <p>
-                    Gửi tín hiệu đến những người bạn tin tưởng khi cần trợ giúp.
-                  </p>
-                </div>
-                <SosDemo />
-              </article>
-              <article className="brand-feature">
-                <div className="brand-feature-symbol">
-                  <HerosIcon name="location" size={82} />
-                </div>
-                <span className="feature-number">02 / Vị trí</span>
-                <h3>Biết bạn ở đâu.</h3>
-                <p>
-                  Chia sẻ vị trí trong tình huống khẩn cấp để người thân có thể
-                  tìm đến.
-                </p>
-              </article>
-              <article className="brand-feature">
-                <div className="brand-feature-symbol">
-                  <HerosIcon name="audio" size={82} />
-                </div>
-                <span className="feature-number">03 / Ghi âm trực tiếp</span>
-                <h3>Lưu điều quan trọng.</h3>
-                <p>
-                  Ghi lại âm thanh khi bạn cần chia sẻ thêm thông tin với người
-                  hỗ trợ.
-                </p>
-              </article>
-              <article className="brand-feature">
-                <div className="brand-feature-symbol">
-                  <HerosIcon name="connection" size={82} />
-                </div>
-                <span className="feature-number">04 / Kết nối</span>
-                <h3>Có người ở bên.</h3>
-                <p>
-                  Giữ những người thân quen trong danh sách liên hệ khẩn cấp của
-                  bạn.
-                </p>
-              </article>
-            </div>
-            <div className="features-bottom">
-              <p>
-                Khả năng hoạt động phụ thuộc vào kết nối, ứng dụng và cấu hình
-                thiết bị.
-              </p>
-              <Link href="/san-pham">
-                Tìm hiểu cách sử dụng <ArrowRight size={17} />
-              </Link>
-            </div>
-          </div>
-        </section>
+        <Connections />
 
         <section id="cau-chuyen" className="manifesto section">
           <Reveal className="story-shell">
