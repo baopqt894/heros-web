@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useInView, useMotionValue, useReducedMotion } from "motion/react";
-import { ArrowClockwise, ArrowRight, ArrowUpRight, BellRinging, Check, CursorClick, MapPin, Microphone, Pause, Play, UsersThree } from "@phosphor-icons/react";
+import { ArrowUpRight, BellRinging, MapPin, Microphone, UsersThree } from "@phosphor-icons/react";
 import ConnectionVisual from "./connection-visual";
 import "./connections.css";
 
@@ -22,15 +22,12 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
   const inView = useInView(stage, { amount: 0.35 });
   const reduced = useReducedMotion();
   const [selected, setSelected] = useState<0 | 1 | 2 | 3>(0);
-  const [automatic, setAutomatic] = useState(true);
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [replayKey, setReplayKey] = useState(0);
   const elapsed = useRef(0);
   const progress = useMotionValue(0);
   const still = paused || Boolean(reduced);
-  const running = automatic && inView && pageVisible && !still && !hovered && !focused;
+  const running = inView && pageVisible && !still;
   const active = features[selected];
 
   useEffect(() => {
@@ -63,7 +60,6 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
   }
 
   function select(index: number) {
-    setAutomatic(false);
     setSelected(index as 0 | 1 | 2 | 3);
     setReplayKey(value => value + 1);
     resetProgress();
@@ -75,26 +71,19 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
       <div className="heros-heading-aside"><p>Từ một tín hiệu SOS đến vị trí được sẻ chia.<br />Khám phá cách Heros kết nối bạn với người thân.</p></div>
     </div>
     <div ref={stage} className="heros-connect-experience">
-      <div className="heros-connect-toolbar">
-        <p><CursorClick size={19} weight="duotone" /><span>Chọn một tính năng để khám phá</span></p>
-        <button type="button" className="heros-connect-auto" disabled={still} aria-pressed={automatic && !still} aria-label={still ? "Tự chuyển đã tắt theo cài đặt chuyển động" : automatic ? "Tạm dừng chuyển tính năng tự động" : "Bật chuyển tính năng tự động"} onClick={() => { resetProgress(); setAutomatic(value => !value); }}>
-          {automatic && !still ? <Pause size={13} weight="fill" /> : <Play size={13} weight="fill" />}
-          <span>{still ? "Chuyển động đã tắt" : automatic ? "Đang tự chuyển" : "Xem tự động"}</span>
-        </button>
-      </div>
-      <div className="heros-connect-grid" onPointerEnter={event => { if (event.pointerType === "mouse") setHovered(true); }} onPointerLeave={() => setHovered(false)}>
-        <div className="heros-connect-tabs" role="tablist" aria-label="Khám phá tính năng Heros" aria-orientation="vertical"
-          onFocusCapture={() => setFocused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
+      <div className="heros-connect-grid">
+        <div className="heros-connect-tabs" role="tablist" aria-label="Khám phá tính năng Heros" aria-orientation="horizontal">
           {features.map((feature, index) => <button ref={element => { tabs.current[index] = element; }} type="button" role="tab" id={`heros-feature-${index}`} aria-controls="heros-feature-panel" aria-selected={selected === index} aria-label={`Khám phá ${feature.label}`} tabIndex={selected === index ? 0 : -1} key={feature.label}
             onClick={() => select(index)} onKeyDown={event => {
               const next = event.key === "ArrowDown" || event.key === "ArrowRight" ? (index + 1) % features.length : event.key === "ArrowUp" || event.key === "ArrowLeft" ? (index + features.length - 1) % features.length : event.key === "Home" ? 0 : event.key === "End" ? features.length - 1 : -1;
               if (next >= 0) { event.preventDefault(); select(next); tabs.current[next]?.focus(); }
             }} className={`heros-connect-tab ${selected === index ? "is-selected" : ""}`}>
             <span className="heros-connect-icon"><feature.icon size={26} weight="light" /></span>
-            <span className="heros-connect-tab-copy"><span className="heros-connect-label">0{index + 1} <i /> {feature.label}</span><strong>{feature.title}</strong><span className="heros-connect-description">{feature.copy}</span><span className="heros-connect-invitation">{selected === index ? <>Đang xem <Check size={13} /></> : <><span className="heros-connect-invite-desktop">Xem cách hoạt động</span><span className="heros-connect-invite-mobile">Xem ngay</span><ArrowRight size={14} /></>}</span></span>
+            <span className="heros-connect-tab-copy"><span className="heros-connect-label">0{index + 1} / {feature.label}</span><strong>{feature.title}</strong></span>
+            <span className="heros-connect-tab-progress" aria-hidden="true"><motion.i style={{ scaleX: index === selected ? (still ? 1 : progress) : 0 }} /></span>
           </button>)}
         </div>
-        <div className="heros-connect-panel" role="tabpanel" id="heros-feature-panel" aria-labelledby={`heros-feature-${selected}`} tabIndex={0} onFocusCapture={() => setFocused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
+        <div className="heros-connect-panel" role="tabpanel" id="heros-feature-panel" aria-labelledby={`heros-feature-${selected}`} tabIndex={0}>
           <div className="heros-connect-panel-top"><span><i /> HEROS CONNECT</span><span className="heros-connect-scene-label">{active.label}<b>0{selected + 1} / 04</b></span></div>
           <div className="heros-connect-visual-stage">
             <AnimatePresence mode="wait" initial={false}>
@@ -103,11 +92,7 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
               </motion.div>
             </AnimatePresence>
           </div>
-          <div className="heros-connect-caption"><span className="heros-connect-caption-kicker">{active.label} / CÙNG HEROS</span><h3>{active.headline}</h3><p>{active.caption}</p></div>
-          <div className="heros-connect-panel-bottom">
-            <div className="heros-connect-progress" aria-hidden="true">{features.map((feature, index) => <span key={feature.label} className={index === selected ? "is-current" : ""}><motion.i style={{ scaleX: index === selected ? (automatic && !still ? progress : 1) : 0 }} /></span>)}</div>
-            <button type="button" onClick={() => { setAutomatic(false); setReplayKey(value => value + 1); resetProgress(); }} disabled={still} aria-label={`Xem lại minh họa ${active.label}`}><ArrowClockwise size={15} /><span>Xem lại</span></button>
-          </div>
+          <div className="heros-connect-caption"><span className="heros-connect-caption-kicker">{active.label} / CÙNG HEROS</span><h3>{active.headline}</h3><p>{active.copy}</p><Link href="/san-pham">Tìm hiểu thêm <ArrowUpRight size={16} /></Link></div>
         </div>
       </div>
     </div>

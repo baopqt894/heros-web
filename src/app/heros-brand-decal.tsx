@@ -53,6 +53,7 @@ export function HerosBrandDecal({
     const image = source.clone();
     image.colorSpace = SRGBColorSpace;
     image.flipY = true;
+    image.anisotropy = 8;
     image.needsUpdate = true;
     return image;
   }, [source]);

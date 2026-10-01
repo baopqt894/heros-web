@@ -46,7 +46,7 @@ function ScrollDevice({ hero }: { hero: boolean }) {
     group.current.rotation.y = MathUtils.damp(group.current.rotation.y, progress.current * Math.PI * 2, 5, delta);
     group.current.rotation.z = MathUtils.damp(group.current.rotation.z, -0.08 + progress.current * 0.16, 5, delta);
   });
-  return <group ref={group}>
+  return <group ref={group} scale={0.8}>
     {/* Rotate around the device body's centerline, independently of the strap. */}
     <HerosDevice centerBody={hero} />
   </group>;
@@ -67,7 +67,7 @@ export default function Heros3D({ hero = false }: { hero?: boolean }) {
   return <div ref={host} className={`heros-model ${hero ? "hero-model" : ""}`}>
     <div className="three-viewer" aria-label="Mô hình Heros 3D tương tác">
       <Suspense fallback={<div className="model-loading">Đang tải mô hình Heros…</div>}>
-        <Canvas frameloop={visible ? "always" : "never"} camera={{ position: hero ? [2.7, 0.9, 8.45] : [4.4, 1.05, 7.75], fov: 32 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true, toneMapping: NeutralToneMapping, toneMappingExposure: 1.15 }}>
+        <Canvas frameloop={visible ? "always" : "never"} camera={{ position: hero ? [2.7, 0.9, 8.45] : [4.4, 1.05, 7.75], fov: 32 }} dpr={[1.5, 2]} gl={{ antialias: true, alpha: true, toneMapping: NeutralToneMapping, toneMappingExposure: 1.15 }}>
           {!hero && <CameraView view={view} revision={viewRevision} />}
           <ambientLight intensity={0.3} />
           <hemisphereLight args={["#fff4f7", "#b87991", 0.4]} />
@@ -81,7 +81,7 @@ export default function Heros3D({ hero = false }: { hero?: boolean }) {
             <Lightformer intensity={1} position={[0, -1, -5]} target={[0, 0, 0]} scale={[5, 5, 1]} />
           </Environment>
           <ScrollDevice hero={hero} />
-          <ContactShadows position={[0, -1.82, 0]} opacity={0.22} scale={8} blur={2.8} far={4} resolution={256} frames={hero ? Infinity : 1} />
+          <ContactShadows position={[0, -1.47, 0]} opacity={0.22} scale={8} blur={2.8} far={4} resolution={256} frames={hero ? Infinity : 1} />
           <OrbitControls target={[0, 0.12, 0]} enablePan={false} enableZoom={false} enableDamping={false} minPolarAngle={0.3} maxPolarAngle={Math.PI - 0.3} />
         </Canvas>
       </Suspense>

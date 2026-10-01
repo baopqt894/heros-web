@@ -1,8 +1,15 @@
 # Đối chiếu góp ý website Heros — 30/09/2026
 
+## Tinh chỉnh bố cục và tự chạy — 01/10/2026
+
+- Bỏ nút tự động và xem lại; tab tự chuyển mỗi 3,5 giây khi đang hiển thị, kể cả sau khi chọn thủ công hoặc rê chuột. Tôn trọng cài đặt giảm chuyển động.
+- Bốn tab nằm ngang trong một khung hồng; minh họa và nội dung đặt cạnh nhau trên desktop, xếp dọc trên điện thoại. Thu gọn phần câu chuyện và khoảng cách với ảnh đời thường.
+- Model thu nhỏ 20%, DPR tối thiểu 1,5 và lọc texture logo anisotropic để giảm răng cưa.
+- Xác minh desktop và mobile 390px, không tràn ngang; lint, TypeScript, build và 25 kiểm thử đạt.
+
 ## Cập nhật chọn lọc từ baolt — 01/10/2026
 
-- Đưa riêng mục “02 / KẾT NỐI LÀ MỘT CÁCH QUAN TÂM” lên trang chủ main, thay nhóm thẻ tính năng cũ. Có 4 minh họa SOS, định vị, ghi âm và người thân; tự chuyển sau 3,5 giây thay vì 6,5 giây. Giữ chọn thủ công, tạm dừng và điều hướng bàn phím.
+- Đưa riêng mục “02 / KẾT NỐI LÀ MỘT CÁCH QUAN TÂM” lên trang chủ main, thay nhóm thẻ tính năng cũ. Có 4 minh họa SOS, định vị, ghi âm và người thân; tự chuyển sau 3,5 giây thay vì 6,5 giây. Giữ chọn thủ công và điều hướng bàn phím.
 - Sao chép model sản phẩm, vật liệu, logo bám theo bề mặt, texture và các kiểm thử hình học từ baolt. Model dùng chung cho trang chủ và trang sản phẩm; không đưa toàn bộ landing page v2 hoặc routing của baolt sang main.
 - Xác minh: lint, TypeScript, build và 25 kiểm thử đều qua; kiểm tra trình duyệt về hiển thị, tự chuyển tính năng và điều hướng bàn phím.
 
