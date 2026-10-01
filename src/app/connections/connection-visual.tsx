@@ -7,13 +7,14 @@ export default function ConnectionVisual({ feature }: { feature: 0 | 1 | 2 | 3 }
   return <div className="heros-feature-art" aria-hidden="true">
     {illustrations.map((name, index) => <Image
       key={name}
-      src={`/images/heros-feature-${name}.png`}
+      src={`/images/heros-feature-${name}.webp`}
       alt=""
-      width={1254}
-      height={1254}
+      width={800}
+      height={800}
+      unoptimized
       sizes="(max-width: 760px) 300px, 400px"
       loading="eager"
-      hidden={index !== feature}
+      className={index === feature ? "is-active" : undefined}
     />)}
   </div>;
 }

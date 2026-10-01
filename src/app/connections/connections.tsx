@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useInView, useMotionValue, useReducedMotion } from "motion/react";
+import { motion, useInView, useMotionValue, useReducedMotion } from "motion/react";
 import { ArrowUpRight, BellRinging, MapPin, Microphone, UsersThree } from "@phosphor-icons/react";
 import ConnectionVisual from "./connection-visual";
 import "./connections.css";
@@ -84,11 +84,9 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
         <div className="heros-connect-panel" role="tabpanel" id="heros-feature-panel" aria-labelledby={`heros-feature-${selected}`} tabIndex={0}>
           <div className="heros-connect-panel-top"><span><i /> HEROS CONNECT</span><span className="heros-connect-scene-label">{active.label}<b>0{selected + 1} / 04</b></span></div>
           <div className="heros-connect-visual-stage">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div className="heros-connect-visual" key={selected} initial={still ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: still ? 0 : -10 }} transition={{ duration: still ? 0 : 0.3 }}>
-                <ConnectionVisual feature={selected} />
-              </motion.div>
-            </AnimatePresence>
+            <div className="heros-connect-visual">
+              <ConnectionVisual feature={selected} />
+            </div>
           </div>
           <div className="heros-connect-caption"><span className="heros-connect-caption-kicker">{active.label} / CÙNG HEROS</span><h3>{active.headline}</h3><p>{active.copy}</p><Link href="/san-pham">Tìm hiểu thêm <ArrowUpRight size={16} /></Link></div>
         </div>

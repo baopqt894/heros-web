@@ -47,11 +47,12 @@ export default function Home() {
             </div>
             <div className="story-artwork">
               <Image
-                src="/images/heros-homecoming.png"
+                src="/images/heros-homecoming.webp"
+                unoptimized
                 loading="eager"
                 alt="Cô gái vừa về đến cửa nhà, đeo túi và nhắn tin cho người thân."
-                width={1254}
-                height={1254}
+                width={800}
+                height={800}
                 sizes="(max-width: 760px) 280px, 400px"
               />
             </div>
