@@ -1,9 +1,9 @@
 :root {
-  --bg: #fff9f7;
-  --soft: #faebef;
-  --pink-soft: #fff0f5;
-  --ink: #4d2935;
-  --muted: #806671;
+  --bg: #fdfcf9;
+  --soft: #f3f1ec;
+  --pink-soft: #faf3f4;
+  --ink: #34312f;
+  --muted: #706963;
   --accent: #d62f68;
   --accent-dark: #a51d4c;
   --line: #d2d2d7;
@@ -192,7 +192,7 @@ legend { padding: 0; }
 .submit { width: 100%; justify-content: space-between; padding-inline: 22px; }
 .form-note { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 15px 0 0; color: var(--muted); font-size: 9px; }
 
-.faq.section { margin-block: 64px; padding: clamp(28px, 5vw, 64px); border-radius: 28px; background: var(--pink-soft); }
+.faq.section { margin-block: 64px; padding: clamp(28px, 5vw, 64px); border-radius: 28px; background: var(--soft); }
 .faq-heading { margin-bottom: 32px; }
 .faq-heading > p { margin-bottom: 16px; color: var(--accent); font-size: 14px; }
 .faq-heading h2 { max-width: 900px; font-size: clamp(28px, 3vw, 40px); line-height: 1.25; }

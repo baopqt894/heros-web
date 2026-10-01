@@ -1,7 +1,7 @@
-/* One shared pink identity across Heros pages. */
+/* Shared neutral surfaces and rose accents across Heros pages. */
 .header {
-  background: rgb(255 249 247 / 0.94);
-  border-color: #eedcdf;
+  background: rgb(253 252 249 / 0.94);
+  border-color: var(--line);
 }
 .nav-inner {
   gap: 24px;
@@ -198,7 +198,7 @@
   margin-top: 30px;
 }
 .usage-section {
-  background: #f8e3ea;
+  background: var(--soft);
 }
 .usage-steps {
   display: grid;
@@ -235,7 +235,7 @@
   margin-top: 35px;
 }
 .download-band {
-  background: #f6dce5;
+  background: var(--soft);
   padding-block: 64px;
 }
 .download-grid {
@@ -380,7 +380,7 @@
   padding: 40px;
   margin-bottom: 80px;
   border-radius: 24px;
-  background: #fae5ed;
+  background: var(--soft);
 }
 .policy-pending h2 {
   font-size: 28px;
@@ -399,7 +399,7 @@
   padding: 44px;
   margin-bottom: 80px;
   border-radius: 28px;
-  background: #f8e3ea;
+  background: var(--soft);
 }
 .contact-page h2 {
   font-size: 25px;
@@ -446,7 +446,7 @@
   max-width: 700px;
   margin: 65px auto;
   padding: 40px;
-  background: #fae5ed;
+  background: var(--soft);
   border-radius: 28px;
 }
 .order-status-card h1 {
@@ -478,7 +478,7 @@
 .account-panel {
   max-width: 700px;
   margin: 0 auto 80px;
-  background: #fae5ed;
+  background: var(--soft);
   padding: 36px;
   border-radius: 24px;
 }
