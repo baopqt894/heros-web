@@ -1,0 +1,27 @@
+# Heros feature illustrations
+
+Generated with the built-in image_gen tool on 2026-10-01. Transparent PNG assets replace the simulated UI illustrations. Style reference: `public/images/heros-homecoming.png`; SOS also uses `heros-product-reference-v2.png` for device shape.
+
+## sos
+
+Asset: `public/images/heros-feature-sos.png`
+
+Use case: illustration-story. Create ONE bespoke editorial spot illustration for the Heros Vietnamese safety product website. Reference 1 is the style reference: match its flowing confident berry ink contours, restrained dusty rose and warm ivory fills, feminine linework; simplify detail for a 300px illustration. Hand-illustrated visual with natural proportions, not a glossy 3D render. Square composition, centered compact group occupying 75% of canvas, all edges and people/objects fully inside with 12% safety margins. True transparent alpha background. No paper rectangle. No text, letters, numerals, chat bubbles, floating UI cards, shields, checkmark badges, orbit circles, sparkles, charts, generic blob backgrounds, stock corporate clipart. Subject: close view of a natural human hand gently holding a SMALL palm-sized Heros safety keychain device, thumb touching its circular front button, strap hanging freely. Three simple short curved ink strokes convey an alert. Reference 2 is the real product shape ONLY: elongated rounded blush body, circular button, tiny vertical indicator, silver ring and pink strap. Keep these recognizable with simplified pen lines; do not copy photographic shading, background, or branding text. Device and entire hand including wrist boundary fully composed, no cropped fingers.
+
+## location
+
+Asset: `public/images/heros-feature-location.png`
+
+Use case: illustration-story. Create ONE bespoke editorial spot illustration for the Heros Vietnamese safety product website. Reference 1 is the style reference: match its flowing confident berry ink contours, restrained dusty rose and warm ivory fills, feminine linework; simplify detail for a 300px illustration. Hand-illustrated visual with natural proportions, not a glossy 3D render. Square composition, centered compact group occupying 75% of canvas, all edges and people/objects fully inside with 12% safety margins. True transparent alpha background. No paper rectangle. No text, letters, numerals, chat bubbles, floating UI cards, shields, checkmark badges, orbit circles, sparkles, charts, generic blob backgrounds, stock corporate clipart. Subject: a small folded paper street map, drawn in elegant berry ink, with only three simple streets, a single rose map pin and one little home at the destination. One gently curving ink path connects pin and home. Quiet editorial travel stationery illustration, diagonally viewed folded paper, understandable without words, no app screen, no satellite map. All map corners within frame.
+
+## audio
+
+Asset: `public/images/heros-feature-audio.png`
+
+Use case: illustration-story. Create ONE bespoke editorial spot illustration for the Heros Vietnamese safety product website. Reference 1 is the style reference: match its flowing confident berry ink contours, restrained dusty rose and warm ivory fills, feminine linework; simplify detail for a 300px illustration. Hand-illustrated visual with natural proportions, not a glossy 3D render. Square composition, centered compact group occupying 75% of canvas, all edges and people/objects fully inside with 12% safety margins. True transparent alpha background. No paper rectangle. No text, letters, numerals, chat bubbles, floating UI cards, shields, checkmark badges, orbit circles, sparkles, charts, generic blob backgrounds, stock corporate clipart. Subject: a natural hand holding a slim phone, with a simple microphone symbol on the otherwise blank screen; to the side, one expressive short hand-drawn waveform signifies voice being recorded. Phone and hand in a natural three-quarter angle, rose sleeve cuff, graceful economical linework. No fake interface, no buttons, no floating card, no recording timer, no typography. Whole phone, hand, and sleeve cuff contained in composition.
+
+## contacts
+
+Asset: `public/images/heros-feature-contacts.png`
+
+Use case: illustration-story. Create ONE bespoke editorial spot illustration for the Heros Vietnamese safety product website. Reference 1 is the style reference: match its flowing confident berry ink contours, restrained dusty rose and warm ivory fills, feminine linework; simplify detail for a 300px illustration. Hand-illustrated visual with natural proportions, not a glossy 3D render. Square composition, centered compact group occupying 75% of canvas, all edges and people/objects fully inside with 12% safety margins. True transparent alpha background. No paper rectangle. No text, letters, numerals, chat bubbles, floating UI cards, shields, checkmark badges, orbit circles, sparkles, charts, generic blob backgrounds, stock corporate clipart. Subject: three young adult friends standing close side by side, casually supporting each other, waist-up complete group portrait: central woman with long flowing hair, a woman friend with shoulder-length hair on her left and a male friend with short hair on her right. Natural gentle smiles, one hand resting on a friend's shoulder; clear anatomically plausible hands. Everyday clothing, warm candid companionship, different hair silhouettes, no superhero poses, no avatars or frames. Focus on trust and human connection, keep faces lightly sketched, not anime, not photorealistic.

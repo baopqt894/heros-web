@@ -23,7 +23,6 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
   const reduced = useReducedMotion();
   const [selected, setSelected] = useState<0 | 1 | 2 | 3>(0);
   const [pageVisible, setPageVisible] = useState(true);
-  const [replayKey, setReplayKey] = useState(0);
   const elapsed = useRef(0);
   const progress = useMotionValue(0);
   const still = paused || Boolean(reduced);
@@ -61,7 +60,6 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
 
   function select(index: number) {
     setSelected(index as 0 | 1 | 2 | 3);
-    setReplayKey(value => value + 1);
     resetProgress();
   }
 
@@ -88,7 +86,7 @@ export default function Connections({ paused = false }: { paused?: boolean }) {
           <div className="heros-connect-visual-stage">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div className="heros-connect-visual" key={selected} initial={still ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: still ? 0 : -10 }} transition={{ duration: still ? 0 : 0.3 }}>
-                <ConnectionVisual feature={selected} playing={inView && pageVisible && !still} replayKey={replayKey} />
+                <ConnectionVisual feature={selected} />
               </motion.div>
             </AnimatePresence>
           </div>

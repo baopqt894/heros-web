@@ -33,7 +33,6 @@
 .heros-connect-scene-label b { font-weight: 400; font-variant-numeric: tabular-nums; }
 .heros-connect-visual-stage { position: relative; height: 340px; min-width: 0; }
 .heros-connect-visual { position: absolute; inset: 0; display: grid; align-items: center; }
-.heros-connect-visual .heros-cv { background: transparent; }
 .heros-connect-caption { padding: 24px 10px 24px 0; }
 .heros-connect-caption-kicker { color: #ac607c; font-size: 9px; letter-spacing: .1em; }
 .heros-connect-caption h3 { margin: 16px 0; max-width: 350px; font-size: clamp(26px, 2.6vw, 36px); line-height: 1.25; letter-spacing: -.045em; color: #572c40; text-wrap: balance; }
@@ -57,7 +56,6 @@
   .heros-connect-tab-copy strong { display: none; }
   .heros-connect-panel { grid-template-columns: minmax(0, 1fr); padding: 20px; gap: 0; }
   .heros-connect-visual-stage { height: 285px; }
-  .heros-connect-visual .heros-cv { height: 285px; }
   .heros-connect-caption { padding: 8px 4px 6px; }
   .heros-connect-caption h3 { font-size: 28px; min-height: 70px; margin: 12px 0; }
   .heros-connect-caption p { min-height: 72px; font-size: 12px; }

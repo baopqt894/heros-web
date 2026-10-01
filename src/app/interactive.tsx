@@ -281,14 +281,14 @@ export function Order({ enabled }: { enabled: boolean }) {
               height={460}
               sizes="(max-width: 768px) 90vw, 400px"
             />
-            <div>
-              <h3>Heros • Hồng phấn</h3>
-              <span>Thiết bị SOS & dây đeo</span>
+            <div className="order-product-details">
+              <div><h3>Heros • Hồng phấn</h3><span>Thiết bị SOS & dây đeo</span></div>
+              <strong>{new Intl.NumberFormat("vi-VN").format(UNIT_PRICE)}đ</strong>
             </div>
           </div>
           <p className="demo-note">
             {enabled
-              ? "590.000đ/thiết bị · Miễn phí giao hàng. Thanh toán chuyển khoản qua payOS hoặc khi nhận hàng."
+              ? "Miễn phí giao hàng. Thanh toán qua payOS hoặc khi nhận hàng."
               : "590.000đ/thiết bị · Heros đang chuẩn bị mở tiếp nhận đơn hàng."}
           </p>
         </div>
