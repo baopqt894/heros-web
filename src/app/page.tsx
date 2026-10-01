@@ -45,16 +45,15 @@ export default function Home() {
                 những điều mới.
               </p>
             </div>
-            <div className="story-message-scene" role="img" aria-label="Minh họa lời nhắn quan tâm: Tớ về rồi. Ừ, nghỉ ngơi nhé.">
-              <div className="story-message-orbit" aria-hidden="true" />
-              <div className="story-care-mark" aria-hidden="true"><HerosIcon name="care" size={46} /></div>
-              <div className="story-bubble story-bubble-home" aria-hidden="true">
-                <span className="story-message-dot" />Tớ về rồi.
-              </div>
-              <div className="story-bubble story-bubble-reply" aria-hidden="true">
-                Ừ, nghỉ ngơi nhé.<HerosIcon name="care" size={24} />
-              </div>
-              <span className="story-message-note" aria-hidden="true">Một lời nhắn. Thêm một chút an tâm.</span>
+            <div className="story-artwork">
+              <Image
+                src="/images/heros-homecoming.png"
+                loading="eager"
+                alt="Cô gái vừa về đến cửa nhà, đeo túi và nhắn tin cho người thân."
+                width={1254}
+                height={1254}
+                sizes="(max-width: 760px) 280px, 400px"
+              />
             </div>
           </Reveal>
         </section>
