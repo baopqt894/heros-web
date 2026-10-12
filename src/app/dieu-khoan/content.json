@@ -1,0 +1,676 @@
+{
+  "intro": "Chính sách và Điều khoản sử dụng này áp dụng đối với thiết bị HEROS, ứng dụng HEROS và các dịch vụ liên quan do HEROS cung cấp. Khi mua, đăng ký tài khoản hoặc tiếp tục sử dụng thiết bị và ứng dụng HEROS, người dùng xác nhận đã đọc, hiểu và đồng ý với các nội dung dưới đây.",
+  "sections": [
+    {
+      "id": "muc-1",
+      "title": "1. Phạm vi áp dụng",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Các chính sách này quy định những nội dung liên quan đến việc giao nhận sản phẩm, bảo hành và đổi trả, xử lý dữ liệu cá nhân, sử dụng tài khoản và dịch vụ, thanh toán, ghi âm và chia sẻ thông tin, cũng như các giới hạn của hệ thống hỗ trợ khẩn cấp."
+        },
+        {
+          "type": "paragraph",
+          "text": "Trong văn bản này:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**“HEROS”** là hệ thống bao gồm thiết bị an toàn cá nhân HEROS, ứng dụng HEROS và các dịch vụ liên quan.",
+            "**“Người dùng”** là cá nhân sở hữu, đăng ký hoặc sử dụng thiết bị và ứng dụng HEROS.",
+            "**“Người liên hệ khẩn cấp” (Trusted Emergency Contact)** là cá nhân được người dùng đăng ký để nhận thông tin hỗ trợ khi xảy ra tình huống khẩn cấp.",
+            "**“Sự kiện khẩn cấp”** là sự kiện được khởi tạo khi người dùng kích hoạt chức năng SOS của HEROS."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muc-2",
+      "title": "2. Chính sách vận chuyển và giao hàng",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "HEROS thực hiện giao sản phẩm đến địa chỉ do khách hàng cung cấp khi đặt hàng."
+        },
+        {
+          "type": "paragraph",
+          "text": "**Tại Đà Nẵng:** thời gian giao hàng dự kiến trong vòng **2–3 giờ** kể từ khi đơn hàng được xác nhận."
+        },
+        {
+          "type": "paragraph",
+          "text": "**Tại các tỉnh/thành phố khác:** thời gian giao hàng dự kiến từ **2–5 ngày**, tùy thuộc vào địa điểm giao hàng và điều kiện vận chuyển thực tế."
+        },
+        {
+          "type": "paragraph",
+          "text": "Khách hàng có trách nhiệm cung cấp chính xác thông tin người nhận, số điện thoại và địa chỉ giao hàng. Thời gian giao hàng có thể thay đổi trong trường hợp xảy ra sự kiện ngoài khả năng kiểm soát hợp lý của HEROS hoặc đơn vị vận chuyển."
+        }
+      ]
+    },
+    {
+      "id": "muc-3",
+      "title": "3. Chính sách bảo hành, đổi trả và hoàn tiền",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "3.1. Thời hạn bảo hành"
+        },
+        {
+          "type": "paragraph",
+          "text": "Thiết bị HEROS được bảo hành trong thời hạn **12 tháng** theo chính sách bảo hành của HEROS."
+        },
+        {
+          "type": "heading",
+          "text": "3.2. Chính sách trong 30 ngày đầu"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trong vòng **30 ngày đầu**, nếu khách hàng phát hiện sản phẩm có lỗi kỹ thuật hoặc tình trạng hư hỏng, va đập ngay khi mở hộp, khách hàng có thể cung cấp video mở hộp, hình ảnh hoặc các bằng chứng liên quan để HEROS tiến hành kiểm tra."
+        },
+        {
+          "type": "paragraph",
+          "text": "Sau khi xác nhận sản phẩm đủ điều kiện, khách hàng có thể lựa chọn một trong hai phương án:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "đổi sang sản phẩm mới; hoặc",
+            "hoàn lại **100% giá trị sản phẩm**."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "3.3. Trường hợp khách hàng chọn đổi sản phẩm"
+        },
+        {
+          "type": "paragraph",
+          "text": "Nếu khách hàng lựa chọn đổi sang sản phẩm mới trong 30 ngày đầu, sản phẩm thay thế tiếp tục được hỗ trợ theo chính sách bảo hành của HEROS đến hết thời hạn bảo hành 12 tháng theo chính sách áp dụng."
+        },
+        {
+          "type": "paragraph",
+          "text": "Từ ngày thứ 31 trở đi, nếu phát sinh lỗi thuộc trách nhiệm của HEROS, sản phẩm chỉ được xử lý theo chính sách bảo hành và không áp dụng thêm quyền hoàn tiền hoặc đổi mới."
+        },
+        {
+          "type": "heading",
+          "text": "3.4. Lỗi phát sinh sau 30 ngày"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trường hợp sản phẩm không phát sinh lỗi trong 30 ngày đầu nhưng lỗi kỹ thuật thuộc trách nhiệm của HEROS được phát hiện từ ngày thứ 31 đến hết thời hạn bảo hành 12 tháng, khách hàng được áp dụng chính sách bảo hành của HEROS."
+        },
+        {
+          "type": "heading",
+          "text": "3.5. Các trường hợp không áp dụng"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS có quyền từ chối bảo hành, đổi trả hoặc hoàn tiền đối với các trường hợp hư hỏng phát sinh từ:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "sử dụng sản phẩm không đúng hướng dẫn;",
+            "làm rơi, va đập, ngấm nước hoặc các tác động bên ngoài do người dùng gây ra;",
+            "tự ý tháo lắp, sửa chữa hoặc can thiệp vào thiết bị;",
+            "sử dụng sản phẩm sai mục đích;",
+            "các nguyên nhân khác không thuộc trách nhiệm của HEROS."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "3.6. Quy trình hoàn tiền"
+        },
+        {
+          "type": "paragraph",
+          "text": "Đối với trường hợp đã được HEROS xác nhận đủ điều kiện hoàn tiền, HEROS hoàn lại **100% giá trị sản phẩm** thông qua tài khoản ngân hàng hoặc phương thức thanh toán ban đầu trong vòng **7-10 ngày làm việc**, kể từ khi HEROS tiếp nhận sản phẩm trả lại và hoàn thành quá trình xác nhận điều kiện hoàn tiền."
+        },
+        {
+          "type": "heading",
+          "text": "3.7. Hỗ trợ sau bán"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trong thời gian sử dụng sản phẩm, khách hàng có thể nhận hỗ trợ liên quan đến:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "hướng dẫn cài đặt và sử dụng thiết bị;",
+            "kết nối thiết bị với ứng dụng HEROS;",
+            "hỗ trợ kỹ thuật;",
+            "bảo trì;",
+            "xử lý các vấn đề phát sinh trong quá trình sử dụng."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muc-4",
+      "title": "4. Chính sách bảo mật và an toàn dữ liệu",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "4.1. Dữ liệu được xử lý"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trong quá trình cung cấp dịch vụ, HEROS có thể xử lý các loại dữ liệu cần thiết cho việc vận hành hệ thống, bao gồm:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "thông tin tài khoản;",
+            "dữ liệu vị trí GPS;",
+            "bản ghi âm phát sinh trong sự kiện khẩn cấp;",
+            "thông tin người liên hệ khẩn cấp."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "4.2. Mục đích xử lý dữ liệu"
+        },
+        {
+          "type": "paragraph",
+          "text": "Dữ liệu được sử dụng nhằm:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "kết nối thiết bị HEROS với ứng dụng;",
+            "vận hành các chức năng của hệ thống;",
+            "truyền tín hiệu SOS;",
+            "cung cấp vị trí và thông tin liên quan đến sự kiện khẩn cấp;",
+            "hỗ trợ người dùng và người liên hệ khẩn cấp;",
+            "vận hành, bảo trì và cải thiện tính ổn định của hệ thống."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS chỉ xử lý dữ liệu trong phạm vi cần thiết đối với các chức năng của hệ thống."
+        },
+        {
+          "type": "heading",
+          "text": "4.3. Phân quyền truy cập"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS áp dụng cơ chế **phân quyền truy cập theo vai trò (Role-based Access)**."
+        },
+        {
+          "type": "paragraph",
+          "text": "Quyền truy cập dữ liệu được phân chia theo từng vai trò nhằm bảo đảm mỗi cá nhân chỉ có thể xem hoặc sử dụng những thông tin cần thiết cho chức năng và phạm vi trách nhiệm của mình."
+        },
+        {
+          "type": "heading",
+          "text": "4.4. Quyền của người dùng"
+        },
+        {
+          "type": "paragraph",
+          "text": "Người dùng có thể:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "xem thông tin cá nhân đã cung cấp cho HEROS;",
+            "cập nhật hoặc điều chỉnh thông tin;",
+            "quản lý một số thông tin liên quan đến tài khoản;",
+            "yêu cầu điều chỉnh hoặc xóa những dữ liệu không còn cần thiết, phù hợp với chính sách lưu trữ và hoạt động của hệ thống."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "4.5. Bảo vệ dữ liệu"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS áp dụng các biện pháp bảo vệ phù hợp đối với dữ liệu trong quá trình truyền tải và lưu trữ nhằm hạn chế nguy cơ:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "truy cập trái phép;",
+            "sử dụng dữ liệu không đúng mục đích;",
+            "mất mát hoặc tiết lộ dữ liệu ngoài phạm vi cho phép."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "4.6. Chia sẻ dữ liệu"
+        },
+        {
+          "type": "paragraph",
+          "text": "Thông tin liên quan đến tình huống khẩn cấp chỉ được chia sẻ trong phạm vi cần thiết để thực hiện chức năng của HEROS, bao gồm việc cung cấp thông tin cần thiết cho **Trusted Emergency Contacts** đã được người dùng đăng ký."
+        },
+        {
+          "type": "heading",
+          "text": "4.7. Đánh giá rủi ro dữ liệu"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS xem xét các rủi ro liên quan đến việc xử lý dữ liệu, đặc biệt đối với:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "dữ liệu vị trí GPS;",
+            "bản ghi âm;",
+            "thông tin liên hệ khẩn cấp."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Việc đánh giá được thực hiện nhằm xác định các biện pháp bảo vệ phù hợp với đặc điểm và mức độ nhạy cảm của từng loại dữ liệu."
+        }
+      ]
+    },
+    {
+      "id": "muc-5",
+      "title": "5. Điều khoản sử dụng",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "5.1. Chấp thuận điều khoản"
+        },
+        {
+          "type": "paragraph",
+          "text": "Người dùng phải đọc và đồng ý với Chính sách và Điều khoản sử dụng trước khi kích hoạt hoặc sử dụng các chức năng của HEROS."
+        },
+        {
+          "type": "paragraph",
+          "text": "Việc tiếp tục sử dụng thiết bị hoặc ứng dụng sau khi chấp thuận được xem là sự đồng ý của người dùng đối với các điều khoản đang có hiệu lực."
+        },
+        {
+          "type": "heading",
+          "text": "5.2. Thông tin tài khoản"
+        },
+        {
+          "type": "paragraph",
+          "text": "Người dùng có trách nhiệm:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "cung cấp thông tin cần thiết một cách chính xác;",
+            "cập nhật thông tin khi có thay đổi;",
+            "bảo vệ thông tin đăng nhập và quyền truy cập vào tài khoản."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "5.3. Sử dụng đúng mục đích"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS được thiết kế nhằm hỗ trợ an toàn cá nhân."
+        },
+        {
+          "type": "paragraph",
+          "text": "Người dùng không được cố ý:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "tạo tín hiệu SOS giả;",
+            "kích hoạt sự kiện khẩn cấp với mục đích gây hiểu nhầm;",
+            "sử dụng hệ thống theo cách gây ảnh hưởng đến người liên hệ khẩn cấp;",
+            "gây gián đoạn hoặc ảnh hưởng đến hoạt động chung của hệ thống HEROS."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "5.4. Đăng ký người liên hệ khẩn cấp"
+        },
+        {
+          "type": "paragraph",
+          "text": "Khi đăng ký một cá nhân làm người liên hệ khẩn cấp, người dùng có trách nhiệm bảo đảm rằng người đó:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "đã được thông báo về việc đăng ký;",
+            "đồng ý cung cấp thông tin liên hệ cho HEROS;",
+            "hiểu vai trò của mình khi nhận được thông báo khẩn cấp."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "5.5. Trách nhiệm của người hỗ trợ"
+        },
+        {
+          "type": "paragraph",
+          "text": "Khi người hỗ trợ xác nhận lựa chọn **“Tới cầu cứu”**, hành động này thể hiện việc người đó đã xác nhận tham gia hỗ trợ tình huống khẩn cấp đang xảy ra."
+        },
+        {
+          "type": "paragraph",
+          "text": "Sau khi xác nhận **“Tới cầu cứu”**, người hỗ trợ có trách nhiệm thực hiện việc hỗ trợ đã xác nhận. Trường hợp người hỗ trợ đã xác nhận **“Tới cầu cứu”** nhưng không thực hiện việc hỗ trợ quá **02 lần**, tài khoản của người đó sẽ bị chấm dứt quyền sử dụng vĩnh viễn và bị loại khỏi danh sách **Trusted Emergency Contacts** trên hệ thống HEROS."
+        },
+        {
+          "type": "paragraph",
+          "text": "Người hỗ trợ chỉ nên xác nhận **“Tới cầu cứu”** khi có khả năng tham gia hỗ trợ và bảo đảm việc hỗ trợ có thể được thực hiện trong điều kiện an toàn cho bản thân."
+        },
+        {
+          "type": "heading",
+          "text": "5.6. Tạm ngừng hoặc chấm dứt tài khoản"
+        },
+        {
+          "type": "paragraph",
+          "text": "Người dùng có thể chủ động ngừng sử dụng dịch vụ HEROS."
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS có quyền tạm ngừng hoặc chấm dứt quyền sử dụng trong trường hợp phát hiện:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "hành vi lạm dụng hệ thống;",
+            "cố ý tạo cảnh báo giả;",
+            "sử dụng dịch vụ không đúng mục đích;",
+            "vi phạm nghiêm trọng hoặc lặp lại các điều khoản sử dụng."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "muc-6",
+      "title": "6. Chính sách thanh toán",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "6.1. Thanh toán thiết bị"
+        },
+        {
+          "type": "paragraph",
+          "text": "Khách hàng thanh toán theo mức giá của phiên bản HEROS được lựa chọn tại thời điểm đặt hàng."
+        },
+        {
+          "type": "paragraph",
+          "text": "Giá áp dụng là giá được hiển thị trên website, ứng dụng hoặc kênh bán hàng chính thức của HEROS tại thời điểm giao dịch."
+        },
+        {
+          "type": "heading",
+          "text": "6.2. Thời gian miễn phí và gia hạn dịch vụ"
+        },
+        {
+          "type": "paragraph",
+          "text": "Một số phiên bản sản phẩm có thể đi kèm thời gian sử dụng dịch vụ kết nối miễn phí theo chính sách bán hàng tại từng thời điểm."
+        },
+        {
+          "type": "paragraph",
+          "text": "Sau khi thời gian miễn phí kết thúc, khách hàng có thể tiếp tục sử dụng dịch vụ thông qua kế hoạch gia hạn do HEROS công bố."
+        },
+        {
+          "type": "heading",
+          "text": "6.3. Thông tin thanh toán"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trước khi thực hiện giao dịch hoặc gia hạn, khách hàng được cung cấp các thông tin cần thiết về:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "giá sản phẩm;",
+            "phí dịch vụ hoặc phí duy trì;",
+            "thời hạn sử dụng;",
+            "thời điểm cần gia hạn;",
+            "phương thức thanh toán áp dụng."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "6.4. Thanh toán trực tuyến"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS dự kiến hỗ trợ thanh toán trực tuyến thông qua **PayOS** và các phương thức thanh toán được HEROS công bố trên hệ thống."
+        }
+      ]
+    },
+    {
+      "id": "muc-7",
+      "title": "7. Chính sách ghi âm và chia sẻ thông tin",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "7.1. Mục đích ghi âm"
+        },
+        {
+          "type": "paragraph",
+          "text": "Chức năng ghi âm được sử dụng nhằm bổ sung thông tin về tình huống khẩn cấp, đặc biệt trong trường hợp người dùng gặp khó khăn trong việc gọi điện, giao tiếp hoặc trực tiếp trình bày tình huống."
+        },
+        {
+          "type": "heading",
+          "text": "7.2. Quyền truy cập bản ghi"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trong quá trình xảy ra sự kiện khẩn cấp, người dùng và người liên hệ khẩn cấp có thể truy cập bản ghi trong phạm vi được hệ thống cho phép để phục vụ việc hỗ trợ."
+        },
+        {
+          "type": "paragraph",
+          "text": "Sau khi sự kiện kết thúc:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "bản ghi được lưu trên hệ thống;",
+            "bản ghi được gắn với tài khoản của người sử dụng;",
+            "người dùng có thể nghe lại bản ghi khi cần;",
+            "bản ghi không được lưu như một bản ghi thuộc tài khoản của người liên hệ khẩn cấp."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "7.3. Thời hạn lưu trữ"
+        },
+        {
+          "type": "paragraph",
+          "text": "Bản ghi âm được lưu trên hệ thống máy chủ của HEROS trong thời hạn **30 ngày kể từ thời điểm bản ghi được tạo**."
+        },
+        {
+          "type": "paragraph",
+          "text": "Sau thời hạn này, bản ghi sẽ được xóa khỏi hệ thống lưu trữ của HEROS."
+        },
+        {
+          "type": "heading",
+          "text": "7.4. Xóa bản ghi"
+        },
+        {
+          "type": "paragraph",
+          "text": "Người dùng có quyền chủ động xóa bản ghi âm thuộc tài khoản của mình."
+        },
+        {
+          "type": "paragraph",
+          "text": "Khi người dùng thực hiện thao tác xóa theo chức năng của hệ thống, bản ghi sẽ được xóa khỏi hệ thống lưu trữ của HEROS theo quy trình áp dụng."
+        },
+        {
+          "type": "heading",
+          "text": "7.5. Bảo vệ bản ghi"
+        },
+        {
+          "type": "paragraph",
+          "text": "Bản ghi âm được xem là dữ liệu cần được bảo vệ và được quản lý theo **Chính sách Bảo mật và An toàn dữ liệu** của HEROS."
+        }
+      ]
+    },
+    {
+      "id": "muc-8",
+      "title": "8. Giới hạn dịch vụ khẩn cấp và trách nhiệm của người dùng",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "8.1. Phụ thuộc vào kết nối"
+        },
+        {
+          "type": "paragraph",
+          "text": "Khả năng truyền tín hiệu SOS, vị trí, bản ghi âm và thông tin sự cố phụ thuộc vào tình trạng kết nối của:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "thiết bị HEROS;",
+            "mạng viễn thông;",
+            "GPS;",
+            "Internet;",
+            "ứng dụng và hệ thống máy chủ."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Trong một số trường hợp mất kết nối hoặc điều kiện kỹ thuật không phù hợp, việc truyền thông tin có thể bị chậm hoặc không hoàn thành."
+        },
+        {
+          "type": "heading",
+          "text": "8.2. Khả năng phản hồi của người liên hệ khẩn cấp"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS hỗ trợ chuyển thông tin đến các liên hệ khẩn cấp đã được đăng ký nhưng **không thể bảo đảm rằng người nhận luôn ở trạng thái có thể tiếp nhận hoặc phản hồi ngay lập tức**."
+        },
+        {
+          "type": "heading",
+          "text": "8.3. HEROS không thay thế cơ quan cứu hộ chuyên nghiệp"
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS là công cụ hỗ trợ truyền tín hiệu và thông tin trong tình huống khẩn cấp."
+        },
+        {
+          "type": "paragraph",
+          "text": "HEROS không phải là cơ quan công an, y tế, cứu hộ hoặc dịch vụ phản ứng khẩn cấp chuyên nghiệp và không bảo đảm thay thế các kênh khẩn cấp chính thức trong các tình huống có nguy cơ nghiêm trọng."
+        },
+        {
+          "type": "heading",
+          "text": "8.4. Trách nhiệm duy trì thiết bị"
+        },
+        {
+          "type": "paragraph",
+          "text": "Người dùng có trách nhiệm:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "bảo đảm thiết bị được sạc và có thể hoạt động;",
+            "sử dụng sản phẩm đúng hướng dẫn;",
+            "duy trì kết nối khi cần thiết;",
+            "thường xuyên kiểm tra và cập nhật danh sách Trusted Emergency Contacts;",
+            "bảo đảm thông tin liên hệ đã đăng ký còn chính xác."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "8.5. Xác nhận trạng thái an toàn"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sau khi tình huống khẩn cấp đã được giải quyết, người dùng **có nghĩa vụ sử dụng chức năng “Tôi đã an toàn”** để:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "xác nhận trạng thái an toàn của bản thân;",
+            "thông báo cho người liên hệ khẩn cấp và các bên liên quan rằng tình huống đã được giải quyết;",
+            "kết thúc sự kiện khẩn cấp trên hệ thống HEROS."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Việc xác nhận **“Tôi đã an toàn”** giúp hệ thống cập nhật chính xác trạng thái của sự kiện và tránh việc các bên liên quan tiếp tục thực hiện các hoạt động hỗ trợ không còn cần thiết."
+        }
+      ]
+    },
+    {
+      "id": "muc-9",
+      "title": "9. Thay đổi chính sách và điều khoản",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "HEROS có thể cập nhật Chính sách và Điều khoản sử dụng để phản ánh sự thay đổi của sản phẩm, dịch vụ hoặc yêu cầu vận hành."
+        },
+        {
+          "type": "paragraph",
+          "text": "Khi có thay đổi đáng kể, HEROS sẽ thông báo trên ứng dụng, website hoặc thông qua phương thức phù hợp trước khi phiên bản mới được áp dụng."
+        },
+        {
+          "type": "paragraph",
+          "text": "Phiên bản mới nhất được công bố trên các kênh chính thức của HEROS sẽ là phiên bản có hiệu lực tại từng thời điểm."
+        }
+      ]
+    },
+    {
+      "id": "muc-10",
+      "title": "10. Liên hệ HEROS",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Nếu có câu hỏi liên quan đến chính sách, bảo hành, dữ liệu cá nhân hoặc việc sử dụng thiết bị, người dùng có thể liên hệ với HEROS thông qua:"
+        }
+      ]
+    },
+    {
+      "id": "xac-nhan",
+      "title": "Xác nhận của người dùng trên App",
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "**☐ Tôi xác nhận đã đọc, hiểu và đồng ý với Chính sách và Điều khoản sử dụng, Chính sách Bảo mật và các quy định liên quan của HEROS.**"
+        },
+        {
+          "type": "paragraph",
+          "text": "**Khuyến nghị**   \nMột người gần bạn đang cần được giúp đỡ. Sự có mặt kịp thời của bạn có thể giúp họ cảm thấy an tâm hơn. Nếu bạn cảm thấy mình có thể hỗ trợ, hãy sẵn sàng giúp đỡ trong khả năng của mình"
+        },
+        {
+          "type": "paragraph",
+          "text": "- Một hành động nhở đúng lúc đôi khi có thể tạo nên một khác biệt rất lớn -"
+        }
+      ]
+    },
+    {
+      "id": "huong-dan-nguoi-ho-tro",
+      "title": "Hướng dẫn dành cho Người hỗ trợ",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Khi được thêm vào danh sách **Trusted Emergency Contacts**, bạn có thể nhận thông báo và theo dõi thông tin an toàn được chia sẻ từ người dùng HEROS."
+        },
+        {
+          "type": "paragraph",
+          "text": "**1. Nhận thông báo khẩn cấp**  \nKhi người dùng kích hoạt SOS, ứng dụng sẽ gửi thông báo đến bạn. Nhấn vào thông báo để xem thông tin được chia sẻ."
+        },
+        {
+          "type": "paragraph",
+          "text": "**2. Xem thông tin SOS**  \nTrong màn hình khẩn cấp, bạn có thể xem các thông tin hiện có như:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Vị trí của người dùng",
+            "Thời điểm SOS được kích hoạt",
+            "Trạng thái hiện tại của cảnh báo",
+            "Bản ghi khẩn cấp, nếu người dùng đã kích hoạt chức năng ghi âm/ghi hình"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "**3. Cập nhật khả năng hỗ trợ**  \nBạn có thể chọn **“Tôi có thể hỗ trợ”** hoặc **“Hiện tại tôi không thể hỗ trợ”** để người dùng và các liên hệ đáng tin cậy khác biết trạng thái của bạn."
+        },
+        {
+          "type": "quote",
+          "text": "Việc lựa chọn trạng thái này chỉ nhằm cập nhật khả năng hỗ trợ, không yêu cầu bạn thực hiện một hành động cụ thể."
+        },
+        {
+          "type": "paragraph",
+          "text": "**4. Theo dõi cập nhật**  \nTrong thời gian cảnh báo còn hoạt động, ứng dụng có thể cập nhật thông tin vị trí và trạng thái của người dùng. Bạn có thể mở lại thông báo SOS để kiểm tra thông tin mới nhất."
+        },
+        {
+          "type": "paragraph",
+          "text": "**5. Khi người dùng xác nhận an toàn**  \nKhi người dùng xác nhận mình đã an toàn, cảnh báo sẽ kết thúc và ứng dụng sẽ thông báo cho các Trusted Emergency Contacts."
+        },
+        {
+          "type": "paragraph",
+          "text": "**Lưu ý:**  \nThông tin khẩn cấp được chia sẻ nhằm giúp bạn nắm được tình trạng của người dùng HEROS. Hãy tôn trọng quyền riêng tư và chỉ sử dụng thông tin này cho mục đích hỗ trợ an toàn."
+        }
+      ]
+    }
+  ]
+}
