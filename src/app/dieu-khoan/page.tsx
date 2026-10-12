@@ -16,25 +16,24 @@ function PolicyText({ text }: { text: string }) {
 export default function PoliciesPage() {
   return (
     <main id="main" className="policies-page">
-      <section className="page-intro wide-shell" aria-labelledby="policy-title">
+      <section className="policy-hero wide-shell" aria-labelledby="policy-title">
         <p className="chapter-label">Minh bạch để an tâm</p>
-        <h1 id="policy-title">Điều khoản<br /><span>& chính sách.</span></h1>
-        <p>Chính sách và Điều khoản sử dụng HEROS</p>
-        <p className="policy-publication-note">Ngày có hiệu lực và phiên bản sẽ được HEROS cập nhật.</p>
+        <h1 id="policy-title">Điều khoản <span>& chính sách.</span></h1>
+        <p>Những điều bạn cần biết khi lựa chọn và đồng hành cùng Heros.</p>
       </section>
-      <div className="wide-shell policies-layout">
-        <aside className="policy-sidebar">
+      <div className="policies-layout">
+        <details className="policy-contents">
+          <summary><span>Mục lục</span><span className="policy-contents-hint">{content.sections.length} mục <span className="policy-contents-toggle" aria-hidden="true">+</span></span></summary>
           <nav aria-label="Mục lục điều khoản">
-            <p className="policy-toc-label">Trong trang này</p>
             <ol>
               {content.sections.map(section => <li key={section.id}>
                 <a href={`#${section.id}`}>{section.title}</a>
               </li>)}
             </ol>
           </nav>
-          <Link className="policy-help-link" href="/lien-he">Cần giải đáp? Liên hệ Heros →</Link>
-        </aside>
+        </details>
         <article className="policy-document" aria-label="Chính sách và Điều khoản sử dụng HEROS">
+          <p className="policy-publication-note">Ngày có hiệu lực và phiên bản sẽ được HEROS cập nhật.</p>
           <p className="policy-introduction">{content.intro}</p>
           {content.sections.map(section => <section key={section.id} id={section.id} className="policy-section" aria-labelledby={`${section.id}-title`}>
             <h2 id={`${section.id}-title`}>{section.title}</h2>
@@ -50,7 +49,10 @@ export default function PoliciesPage() {
             {section.id === "muc-10" && <Link href="/lien-he" className="button">Liên hệ Heros</Link>}
             {section.id === "xac-nhan" && <p className="policy-context-note">Nội dung xác nhận dành cho ứng dụng HEROS.</p>}
           </section>)}
-          <a className="policy-back-top" href="#policy-title">Về đầu trang ↑</a>
+          <div className="policy-document-footer">
+            <Link href="/lien-he">Cần giải đáp? Liên hệ Heros →</Link>
+            <a href="#policy-title">Về đầu trang ↑</a>
+          </div>
         </article>
       </div>
     </main>
