@@ -8,7 +8,11 @@ import {
 
 export function DownloadButtons() {
   const stores = [
-    { label: "App Store", url: process.env.HEROS_IOS_URL, Icon: AppleLogo },
+    {
+      label: "App Store",
+      url: "https://apps.apple.com/us/app/heros-safety-with-you/id6824536295",
+      Icon: AppleLogo,
+    },
     {
       label: "Google Play",
       url: process.env.HEROS_ANDROID_URL,
