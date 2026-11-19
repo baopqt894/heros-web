@@ -1,5 +1,5 @@
 import { createHash, timingSafeEqual } from "node:crypto";
-import { db } from "../../../../lib/store.ts";
+import { backend } from "../../../../lib/backend.ts";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const headers = { "Cache-Control": "private, no-store", "Vary": "Authorization" };
@@ -15,9 +15,20 @@ export async function GET(request: Request) {
   if (!/^\d+$/.test(raw) || !Number.isSafeInteger(after))
     return Response.json({ error: "INVALID_CURSOR" }, { status: 400, headers });
   try {
-    const rows = db().prepare("SELECT id,name,email,phone,message,createdAt FROM contact_messages WHERE id > ? ORDER BY id ASC LIMIT 201").all(after);
-    const messages = rows.slice(0, 200);
-    return Response.json({ messages, nextCursor: messages.length ? messages[messages.length - 1].id : after, hasMore: rows.length > 200 }, { headers });
+    const page = await backend<{ messages: { id: string; name: string; email: string; phone: string; message: string; createdAt: string }[]; nextCursor: number; hasMore: boolean }>(
+      `contact/export?after=${after}`, { token: key },
+    );
+    if (!page || !Array.isArray(page.messages) || page.messages.length > 200 ||
+      typeof page.hasMore !== "boolean" || page.nextCursor !== after + page.messages.length ||
+      (page.hasMore && page.messages.length === 0) ||
+      page.messages.some(row => !row || !/^[a-f0-9]{24}$/.test(row.id) ||
+        [row.name, row.email, row.phone, row.message, row.createdAt].some(value => typeof value !== "string")))
+      throw new Error("Invalid backend export response");
+    // Explicit fields prevent any additional backend/private properties leaking.
+    return Response.json({
+      messages: page.messages.map(({ id, name, email, phone, message, createdAt }) => ({ id, name, email, phone, message, createdAt })),
+      nextCursor: page.nextCursor, hasMore: page.hasMore,
+    }, { headers });
   } catch {
     return Response.json({ error: "STORAGE_UNAVAILABLE" }, { status: 503, headers });
   }

@@ -6,7 +6,7 @@ import { createContext, runInContext } from "node:vm";
 test("Sheets synchronization preserves existing status, escapes formulas, and retries safely after a partial write", () => {
   const rows = [
     ["ID", "Thời gian (VN)", "Họ tên", "Email", "Số điện thoại", "Lời nhắn", "Trạng thái"],
-    ["web:1", "2026-11-19", "Existing", "existing@example.com", "0900000000", "Existing feedback", "Đã xử lý"],
+    ["mongo:000000000000000000000001", "2026-11-19", "Existing", "existing@example.com", "0900000000", "Existing feedback", "Đã xử lý"],
   ];
   const props = new Map([["HEROS_FEEDBACK_EXPORT_KEY", "test-key".repeat(8)]]);
   let releases = 0;
@@ -36,7 +36,7 @@ test("Sheets synchronization preserves existing status, escapes formulas, and re
       assert.equal(options.headers.Authorization, "Bearer " + props.get("HEROS_FEEDBACK_EXPORT_KEY"));
       assert.equal(options.followRedirects, false);
       const after = Number(new URL(url).searchParams.get("after"));
-      const messages = [1, 2].filter(id => id > after).map(id => ({ id, name: "=HYPERLINK()", email: "test@example.com", phone: "+84900000000", message: "=1+1", createdAt: "2026-11-19T03:00:00.000Z" }));
+      const messages = [1, 2].filter(id => id > after).map(id => ({ id: String(id).padStart(24, "0"), name: "=HYPERLINK()", email: "test@example.com", phone: "+84900000000", message: "=1+1", createdAt: "2026-11-19T03:00:00.000Z" }));
       return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ messages, nextCursor: 2, hasMore: false }) };
     } },
   });

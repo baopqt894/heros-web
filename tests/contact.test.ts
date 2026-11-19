@@ -1,25 +1,17 @@
-import { test, after } from "node:test";
+import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
 import { randomBytes } from "node:crypto";
 import { trustedOrigin } from "../src/lib/http.ts";
 import { siteUrl } from "../src/lib/payos.ts";
-import { db } from "../src/lib/store.ts";
 import { POST } from "../src/app/api/contact/route.ts";
 import { GET } from "../src/app/api/contact/export/route.ts";
 
-const directory = mkdtempSync(join(tmpdir(), "heros-contact-test-"));
-process.env.HEROS_DB_PATH = join(directory, "test.sqlite");
 const production = "https://heros.dolphinxstudio.com";
 const request = (origin?: string, extra: Record<string, string> = {}) => new Request(`${production}/api/contact`, {
   method: "POST",
   headers: { "Content-Type": "application/json", ...(origin ? { Origin: origin } : {}), ...extra },
   body: "{}",
 });
-
-after(() => { db().close(); rmSync(directory, { recursive: true, force: true }); });
 
 test("production defaults to the canonical site, rejects foreign and spoofed origins", () => {
   Object.assign(process.env, { NODE_ENV: "production" });
@@ -37,44 +29,77 @@ test("production defaults to the canonical site, rejects foreign and spoofed ori
   delete process.env.HEROS_SITE_URL;
 });
 
-test("contact accepts a production request, validates input, and persists only valid messages", async () => {
-  Object.assign(process.env, { NODE_ENV: "production" });
-  delete process.env.HEROS_SITE_URL;
-  assert.equal((await POST(request("https://evil.example"))).status, 403);
-  assert.equal((await POST(request(production))).status, 400);
-  const response = await POST(new Request(`${production}/api/contact`, {
-    method: "POST", headers: { Origin: production, "Content-Type": "application/json" },
-    body: JSON.stringify({ name: "Contact test", email: "test@example.com", phone: "", message: "Isolated test message" }),
-  }));
-  assert.equal(response.status, 201);
-  assert.equal(db().prepare("SELECT count(*) AS count FROM contact_messages").get()?.count, 1);
+const valid = { name: "Contact test", email: "test@example.com", phone: "", message: "Isolated test message" };
+const submit = () => POST(new Request(`${production}/api/contact`, {
+  method: "POST", headers: { Origin: production, "Content-Type": "application/json", "X-Forwarded-For": randomBytes(16).toString("hex") },
+  body: JSON.stringify(valid),
+}));
+
+test("contact validates before forwarding and only acknowledges a saved backend record", async () => {
+  const original = globalThis.fetch;
+  process.env.HEROS_API_URL = "https://heros.nextteam.site/v1/";
+  let calls = 0;
+  globalThis.fetch = async (url, init) => {
+    calls++;
+    assert.equal(String(url), "https://heros.nextteam.site/v1/contact");
+    assert.equal(init?.method, "POST");
+    assert.deepEqual(JSON.parse(String(init?.body)), valid);
+    return Response.json({ success: true, data: { id: "0123456789abcdef01234567" } }, { status: 201 });
+  };
+  try {
+    assert.equal((await POST(request("https://evil.example"))).status, 403);
+    assert.equal((await POST(request(production))).status, 400);
+    assert.equal(calls, 0);
+    assert.equal((await submit()).status, 201);
+    assert.equal(calls, 1);
+    globalThis.fetch = async () => { throw new Error("offline"); };
+    assert.equal((await submit()).status, 503);
+    globalThis.fetch = async () => Response.json({ success: false }, { status: 200 });
+    assert.equal((await submit()).status, 503);
+    globalThis.fetch = async () => Response.json({ success: true, data: {} });
+    assert.equal((await submit()).status, 503);
+    globalThis.fetch = async () => Response.json({ success: false, data: { errorCode: "TOO_MANY_REQUESTS" } }, { status: 429 });
+    assert.equal((await submit()).status, 429);
+  } finally { globalThis.fetch = original; }
 });
 
-test("feedback export requires a strong configured key and paginates without exposing data anonymously", async () => {
+test("feedback export authenticates before contacting backend and strips additional private fields", async () => {
+  const original = globalThis.fetch;
   const key = randomBytes(32).toString("hex");
   const read = (after = "0", token = key) => GET(new Request(`${production}/api/contact/export?after=${after}`, {
     headers: { Authorization: `Bearer ${token}` },
   }));
-  delete process.env.HEROS_FEEDBACK_EXPORT_KEY;
-  assert.equal((await read()).status, 503);
-  process.env.HEROS_FEEDBACK_EXPORT_KEY = "short";
-  assert.equal((await read()).status, 503);
-  process.env.HEROS_FEEDBACK_EXPORT_KEY = key;
-  assert.equal((await read("0", "wrong")).status, 401);
-  assert.equal((await GET(new Request(`${production}/api/contact/export`))).status, 401);
-  for (const invalid of ["-1", "1.5", "abc", "9007199254740992"])
-    assert.equal((await read(invalid)).status, 400);
-  const insert = db().prepare("INSERT INTO contact_messages(name,email,phone,message,createdAt) VALUES (?,?,?,?,?)");
-  for (let index = 0; index < 200; index++) insert.run("Test", "test@example.com", "0900000000", "Test", new Date().toISOString());
-  const firstResponse = await read();
-  assert.equal(firstResponse.headers.get("Cache-Control"), "private, no-store");
-  const first = await firstResponse.json();
-  assert.equal(first.messages.length, 200);
-  assert.equal(first.nextCursor, 200);
-  assert.equal(first.hasMore, true);
-  const second = await (await read(String(first.nextCursor))).json();
-  assert.equal(second.messages.length, 1);
-  assert.equal(second.nextCursor, 201);
-  assert.equal(second.hasMore, false);
-  assert.deepEqual((await (await read("201")).json()).messages, []);
+  let calls = 0;
+  globalThis.fetch = async (url, init) => {
+    calls++;
+    assert.equal(String(url), "https://heros.nextteam.site/v1/contact/export?after=10");
+    assert.equal(new Headers(init?.headers).get("authorization"), `Bearer ${key}`);
+    assert.equal(init?.cache, "no-store");
+    return Response.json({ success: true, data: {
+      messages: [{ ...valid, id: "0123456789abcdef01234567", createdAt: "2026-11-19T00:00:00.000Z", internalNote: "private" }], nextCursor: 11, hasMore: false,
+    } });
+  };
+  try {
+    delete process.env.HEROS_FEEDBACK_EXPORT_KEY;
+    assert.equal((await read()).status, 503);
+    process.env.HEROS_FEEDBACK_EXPORT_KEY = "short";
+    assert.equal((await read()).status, 503);
+    process.env.HEROS_FEEDBACK_EXPORT_KEY = key;
+    assert.equal((await read("0", "wrong")).status, 401);
+    assert.equal((await GET(new Request(`${production}/api/contact/export`))).status, 401);
+    for (const invalid of ["-1", "1.5", "abc", "9007199254740992"])
+      assert.equal((await read(invalid)).status, 400);
+    assert.equal(calls, 0);
+    const response = await read("10");
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("Cache-Control"), "private, no-store");
+    const page = await response.json();
+    assert.equal(page.nextCursor, 11);
+    assert.equal(page.messages[0].internalNote, undefined);
+    assert.equal(calls, 1);
+    globalThis.fetch = async () => Response.json({ success: true, data: { messages: [], nextCursor: 11, hasMore: true } });
+    assert.equal((await read("10")).status, 503);
+    globalThis.fetch = async () => { throw new Error("offline"); };
+    assert.equal((await read()).status, 503);
+  } finally { globalThis.fetch = original; }
 });

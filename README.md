@@ -6,7 +6,7 @@ Website tiếng Việt, một phiên bản có mô hình 360°; `/v1` và `/v2` 
 
 ## Chạy
 
-Node.js >=22.13, lưu trữ ổ đĩa bền vững.
+Node.js >=22.13. Dữ liệu tài khoản, đơn hàng và feedback dùng MongoDB ở backend HEROS.
 
 ```bash
 npm install
@@ -19,7 +19,7 @@ Mở http://127.0.0.1:3000. `HEROS_SITE_URL` phải khớp origin truy cập đ�
 
 Production Heros dùng `HEROS_SITE_URL=https://heros.dolphinxstudio.com` (không có `/api/contact`). Khi không đặt biến này, production mặc định dùng tên miền trên; development dùng `http://127.0.0.1:3000`. Nếu Vercel đã có giá trị localhost hoặc tên miền cũ, phải sửa biến ở môi trường **Production** và redeploy. Các header `Host`/`X-Forwarded-Host` không được dùng để tự cho phép origin mới.
 
-Form feedback: `POST /api/contact`. API lấy dữ liệu cho Google Sheets: `GET /api/contact/export`, yêu cầu `Authorization: Bearer <HEROS_FEEDBACK_EXPORT_KEY>`; không mở công khai dữ liệu cá nhân. Xem [hướng dẫn Google Sheets](integrations/google-sheets/README.md). SQLite cần ổ đĩa bền vững; filesystem tạm của Vercel không phải nơi lưu feedback lâu dài.
+Form feedback: `POST /api/contact`. API lấy dữ liệu cho Google Sheets: `GET /api/contact/export`, yêu cầu `Authorization: Bearer <HEROS_FEEDBACK_EXPORT_KEY>`; không mở công khai dữ liệu cá nhân. Xem [hướng dẫn Google Sheets](integrations/google-sheets/README.md). POST và export chuyển tiếp tới backend `POST /v1/contact` và `GET /v1/contact/export`; FE không còn ghi SQLite. Backend phải được deploy với ContactModule mới. Nếu backend chưa có route này, form vẫn trả lỗi thay vì báo lưu thành công giả.
 
 ## Đơn hàng và thanh toán
 
@@ -36,7 +36,7 @@ Form feedback: `POST /api/contact`. API lấy dữ liệu cho Google Sheets: `GE
 
 ## Đưa lên môi trường công khai
 
-1. Deploy backend HEROS với MongoDB chung và migrate tài khoản/đơn SQLite cũ trước khi chuyển web. `HEROS_DB_PATH` vẫn cần ổ đĩa bền vững cho form liên hệ và backup dữ liệu cũ.
+1. Deploy backend HEROS với MongoDB chung và migrate tài khoản/đơn SQLite cũ trước khi chuyển web. Deploy ContactModule để lưu feedback trong MongoDB. Giữ backup SQLite cũ nếu có dữ liệu lịch sử; thay đổi này không tự migrate hoặc xóa dữ liệu cũ.
 2. Web đặt `HEROS_API_URL=https://heros.nextteam.site/v1/` và `HEROS_SITE_URL` là tên miền HTTPS thật. Backend đặt cùng website origin và ba key payOS kênh Heros. Reverse proxy phải tự đặt `X-Forwarded-For`, không giữ giá trị tùy ý từ client.
 3. Trong payOS/kênh Heros đặt Webhook URL thành `https://<domain>/api/payos/webhook` và xác nhận kết nối. Localhost không nhận được webhook công khai.
 4. Kiểm tra tạo link, hủy link, trạng thái trả về và webhook bằng môi trường công khai. Việc tạo được link không phải bằng chứng đã nhận tiền.
@@ -46,7 +46,7 @@ Form feedback: `POST /api/contact`. API lấy dữ liệu cho Google Sheets: `GE
 
 - Chưa có URL App Store/Google Play: các nút báo đang chuẩn bị, không dẫn đến app khác. Thêm `HEROS_IOS_URL` và `HEROS_ANDROID_URL` khi có.
 - Đã có tên và ảnh 6 thành viên trong `src/content/team.ts`: Bảo Hân, Thuỳ Linh, Lương Đặng, Ni Na, Tom Trần, Bảo Châu. Ảnh do chủ dự án cung cấp từ Drive, tối ưu WebP để dùng trên web; `Hiển.jpg` là Tom Trần, đã được chủ dự án xác nhận. Chưa có vai trò chính thức.
-- `HEROS_CONTACT_EMAIL` tùy chọn. Form liên hệ lưu thật vào bảng `contact_messages`, chưa gửi email hay thông báo cho đội ngũ. Đơn hàng mới nằm trong collection `commerce_orders` của backend. Bảng `orders` SQLite cũ được giữ làm nguồn migration/backup. Không công khai file SQLite.
+- `HEROS_CONTACT_EMAIL` tùy chọn. Form liên hệ gửi đến backend và lưu vào collection MongoDB `contact_messages`, chưa gửi email hay thông báo cho đội ngũ. Đơn hàng mới nằm trong collection `commerce_orders` của backend. Bảng `orders` SQLite cũ được giữ làm nguồn migration/backup. Không công khai file SQLite.
 - Mô hình 360° là mô hình minh họa WebGL; không phải bản CAD sản xuất.
 
 ## Nguồn

@@ -1,4 +1,5 @@
-import { allowRequest, db } from "../../../lib/store.ts";
+import { allowRequest } from "../../../lib/store.ts";
+import { backend, BackendError } from "../../../lib/backend.ts";
 import { readBody, trustedOrigin } from "../../../lib/http.ts";
 export const runtime = "nodejs";
 export async function POST(request: Request) {
@@ -37,15 +38,18 @@ export async function POST(request: Request) {
     )
       throw new Error();
     try {
-      db()
-        .prepare(
-          "INSERT INTO contact_messages(name,email,phone,message,createdAt) VALUES (?,?,?,?,?)",
-        )
-        .run(name, email, phone, message, new Date().toISOString());
-    } catch {
+      const saved = await backend<{ id: string }>("contact", {
+        method: "POST",
+        body: { name, email, phone, message },
+      });
+      if (!saved || typeof saved.id !== "string" || !saved.id)
+        throw new Error("Backend did not acknowledge persistence");
+    } catch (error) {
       return Response.json(
-        { error: "Chưa thể lưu lời nhắn. Vui lòng thử lại sau." },
-        { status: 503 },
+        { error: error instanceof BackendError && error.status === 429
+          ? "Vui lòng chờ một phút trước khi gửi thêm lời nhắn."
+          : "Chưa thể lưu lời nhắn. Vui lòng thử lại sau." },
+        { status: error instanceof BackendError && error.status === 429 ? 429 : 503 },
       );
     }
     return Response.json(

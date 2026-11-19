@@ -41,12 +41,13 @@ function fetchFeedback() {
       let data;
       try { data=JSON.parse(response.getContentText()); } catch(e) { throw new Error('API không trả JSON hợp lệ.'); }
       if (!Array.isArray(data.messages) || typeof data.hasMore !== 'boolean' || !Number.isSafeInteger(data.nextCursor) || data.nextCursor < cursor || (data.hasMore && data.nextCursor <= cursor)) throw new Error('Dữ liệu phân trang không hợp lệ.');
-      let last = cursor;
+      if (data.nextCursor !== cursor + data.messages.length || (data.hasMore && !data.messages.length)) throw new Error('Cursor không khớp dữ liệu.');
+      const pageIds = new Set();
       const pending = [];
       data.messages.forEach(item=>{
-        if (!Number.isSafeInteger(item.id) || item.id <= last || ['name','email','phone','message','createdAt'].some(k=>typeof item[k]!=='string')) throw new Error('Feedback trả về không hợp lệ.');
-        last=item.id;
-        const id='web:'+item.id;
+        if (!item || typeof item.id !== 'string' || !/^[a-f0-9]{24}$/.test(item.id) || pageIds.has(item.id) || ['name','email','phone','message','createdAt'].some(k=>typeof item[k]!=='string')) throw new Error('Feedback trả về không hợp lệ.');
+        pageIds.add(item.id);
+        const id='mongo:'+item.id;
         if (ids.has(id)) return;
         const time = new Date(item.createdAt);
         if (isNaN(time.getTime())) throw new Error('Ngày feedback không hợp lệ.');
@@ -54,7 +55,6 @@ function fetchFeedback() {
         pending.push([id,Utilities.formatDate(time,'Asia/Ho_Chi_Minh','yyyy-MM-dd HH:mm:ss'),item.name,item.email,item.phone,item.message,'Chưa xử lý'].map(safe));
         ids.add(id);
       });
-      if (last !== data.nextCursor) throw new Error('Cursor không khớp dữ liệu.');
       if (pending.length) {
         const end=sheet.getLastRow()+pending.length;
         if (end>sheet.getMaxRows()) sheet.insertRowsAfter(sheet.getMaxRows(),end-sheet.getMaxRows());
@@ -63,7 +63,9 @@ function fetchFeedback() {
         added+=pending.length;
       }
       cursor=data.nextCursor;
-      properties.setProperty(cursorKey,String(cursor));
+      // Full rescan after completing a cycle also recovers delayed inserts;
+      // IDs prevent duplicates and preserve the team's processing status.
+      properties.setProperty(cursorKey,data.hasMore ? String(cursor) : '0');
       if (!data.hasMore) return added ? 'Đã lấy thêm '+added+' feedback.' : 'Đã cập nhật. Không có feedback mới.';
     }
     return 'Đã lấy thêm '+added+' feedback. Bấm lại để tiếp tục lấy các trang còn lại.';
