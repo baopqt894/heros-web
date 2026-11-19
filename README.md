@@ -17,9 +17,13 @@ npm run dev -- --hostname 127.0.0.1
 
 Mở http://127.0.0.1:3000. `HEROS_SITE_URL` phải khớp origin truy cập để bảo vệ POST. Lint/TypeScript: `npm run check`; kiểm thử thanh toán: `npm test`; production: `npm run build && npm start`.
 
+Production Heros dùng `HEROS_SITE_URL=https://heros.dolphinxstudio.com` (không có `/api/contact`). Khi không đặt biến này, production mặc định dùng tên miền trên; development dùng `http://127.0.0.1:3000`. Nếu Vercel đã có giá trị localhost hoặc tên miền cũ, phải sửa biến ở môi trường **Production** và redeploy. Các header `Host`/`X-Forwarded-Host` không được dùng để tự cho phép origin mới.
+
+Form feedback: `POST /api/contact`. API lấy dữ liệu cho Google Sheets: `GET /api/contact/export`, yêu cầu `Authorization: Bearer <HEROS_FEEDBACK_EXPORT_KEY>`; không mở công khai dữ liệu cá nhân. Xem [hướng dẫn Google Sheets](integrations/google-sheets/README.md). SQLite cần ổ đĩa bền vững; filesystem tạm của Vercel không phải nơi lưu feedback lâu dài.
+
 ## Đơn hàng và thanh toán
 
-- Giá đã được chủ thương hiệu xác nhận: **590.000đ/thiết bị**, miễn phí giao hàng, số lượng 1–10. Máy chủ tự tính tiền.
+- Giá hiển thị mới theo chủ thương hiệu: **960.000đ/thiết bị**, miễn phí giao hàng, số lượng 1–10. Máy chủ backend tự tính tiền; chủ dự án cập nhật/deploy backend riêng. Đơn cũ giữ nguyên số tiền đã lưu.
 - Kênh payOS riêng **Heros**, tài khoản ngân hàng chính đã liên kết trong payOS. Ba key đặt trong `.env` backend HEROS, không commit và không gửi ra client.
 - `POST /api/orders`: lưu đơn trước khi tạo link thật qua SDK payOS; hỗ trợ COD. UUID cho mỗi yêu cầu chống tạo trùng. Đơn lưu trong MongoDB backend HEROS; web proxy API và giữ cookie HttpOnly.
 - Điền thông tin nhận hàng, chọn số lượng và thanh toán trước; bấm “Tiếp tục mua hàng” mới mở đăng nhập/tạo tài khoản. Đăng nhập xong xem lại và xác nhận, không tự tạo đơn. Người đã đăng nhập đi thẳng đến bước xem lại. Thông tin người nhận được giữ nguyên khi đăng nhập, đổi tab đăng ký hoặc đóng/mở hộp thoại; email người nhận có thể khác email tài khoản. Phiên hết hạn khi xác nhận sẽ yêu cầu đăng nhập lại và giữ nguyên đơn nháp. `/tai-khoan` hiển thị lịch sử đơn trên các thiết bị đăng nhập cùng tài khoản, không cần nhớ mã đơn. Access JWT không hết hạn, vẫn bị thu hồi qua session backend. Web giữ JWT trong cookie HttpOnly tối đa 400 ngày (tùy trình duyệt). Mật khẩu được băm bằng scrypt trong backend; một phiên web và một phiên mobile dùng chung tài khoản có thể tồn tại cùng lúc.
@@ -41,7 +45,7 @@ Mở http://127.0.0.1:3000. `HEROS_SITE_URL` phải khớp origin truy cập đ�
 ## Nội dung chờ nguồn chính thức
 
 - Chưa có URL App Store/Google Play: các nút báo đang chuẩn bị, không dẫn đến app khác. Thêm `HEROS_IOS_URL` và `HEROS_ANDROID_URL` khi có.
-- Đã có 6 thành viên do chủ thương hiệu cung cấp trong `src/content/team.ts`: Bảo Hân, Thuỳ Linh, Lương Đặng, Ni Na, Tom Trần, Bảo Châu. Hiện dùng hình chữ cái; chưa có ảnh chân dung/vai trò chính thức. Điều khoản chính thức vẫn chờ nội dung từ chủ thương hiệu.
+- Đã có tên và ảnh 6 thành viên trong `src/content/team.ts`: Bảo Hân, Thuỳ Linh, Lương Đặng, Ni Na, Tom Trần, Bảo Châu. Ảnh do chủ dự án cung cấp từ Drive, tối ưu WebP để dùng trên web; `Hiển.jpg` là Tom Trần, đã được chủ dự án xác nhận. Chưa có vai trò chính thức.
 - `HEROS_CONTACT_EMAIL` tùy chọn. Form liên hệ lưu thật vào bảng `contact_messages`, chưa gửi email hay thông báo cho đội ngũ. Đơn hàng mới nằm trong collection `commerce_orders` của backend. Bảng `orders` SQLite cũ được giữ làm nguồn migration/backup. Không công khai file SQLite.
 - Mô hình 360° là mô hình minh họa WebGL; không phải bản CAD sản xuất.
 

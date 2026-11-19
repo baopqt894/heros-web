@@ -167,17 +167,12 @@ export default function AboutPage() {
               key={member.name}
               className={`team-member team-tone-${index % 3}`}
             >
-              <div
-                className="team-portrait"
-                aria-label={`Chân dung chữ cái của ${member.name}`}
-              >
-                <svg viewBox="0 0 260 240" aria-hidden="true">
-                  <path d="M-20 170C70 170 72 30 160 30s50 100 125 100M-20 190C88 190 95 48 165 48s43 100 120 100M-20 210C100 210 115 66 170 66s35 100 115 100" />
-                </svg>
-                <span>{member.initials}</span>
-                <HerosIcon
-                  name={index % 2 === 0 ? "care" : "safety"}
-                  size={30}
+              <div className="team-portrait">
+                <Image
+                  src={member.portrait}
+                  alt={member.name}
+                  fill
+                  sizes="(max-width: 700px) 50vw, 33vw"
                 />
               </div>
               <div className="team-member-caption">

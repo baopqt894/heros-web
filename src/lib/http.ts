@@ -1,7 +1,15 @@
 import "server-only";
 import { siteUrl } from "./payos.ts";
 export function trustedOrigin(request: Request) {
-  return request.headers.get("origin") === siteUrl();
+  const origin = request.headers.get("origin");
+  if (!origin || origin === "null") return false;
+  try {
+    // Only the configured origin is trusted; proxy/client Host headers cannot
+    // expand the allowlist for contact, account, or checkout requests.
+    return origin === siteUrl();
+  } catch {
+    return false;
+  }
 }
 export async function readBody(request: Request) {
   if (!request.headers.get("content-type")?.includes("application/json"))

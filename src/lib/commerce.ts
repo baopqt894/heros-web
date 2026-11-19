@@ -1,4 +1,4 @@
-export const UNIT_PRICE = 590000;
+export const UNIT_PRICE = 960000;
 export const SHIPPING_FEE = 0;
 export type Customer = {
   name: string;

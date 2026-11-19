@@ -599,10 +599,14 @@
   position: relative;
   background: #f1d0dd;
   border-radius: 16px;
-  aspect-ratio: 1.35;
+  aspect-ratio: 2 / 3;
   display: grid;
   place-items: center;
   overflow: hidden;
+}
+.team-portrait > img {
+  object-fit: cover;
+  object-position: center top;
 }
 .team-tone-1 .team-portrait {
   background: #f8e4ea;
@@ -1071,7 +1075,7 @@
     gap: 24px 15px;
   }
   .team-portrait {
-    aspect-ratio: 0.95;
+    aspect-ratio: 2 / 3;
     border-radius: 12px;
   }
   .team-portrait > span {

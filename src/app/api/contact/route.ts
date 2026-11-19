@@ -1,5 +1,5 @@
-import { allowRequest, db } from "@/lib/store";
-import { readBody, trustedOrigin } from "@/lib/http";
+import { allowRequest, db } from "../../../lib/store.ts";
+import { readBody, trustedOrigin } from "../../../lib/http.ts";
 export const runtime = "nodejs";
 export async function POST(request: Request) {
   if (!trustedOrigin(request))

@@ -289,7 +289,7 @@ export function Order({ enabled }: { enabled: boolean }) {
           <p className="demo-note">
             {enabled
               ? "Miễn phí giao hàng. Thanh toán qua payOS hoặc khi nhận hàng."
-              : "590.000đ/thiết bị · Heros đang chuẩn bị mở tiếp nhận đơn hàng."}
+              : `${money(UNIT_PRICE)}/thiết bị · Heros đang chuẩn bị mở tiếp nhận đơn hàng.`}
           </p>
         </div>
         <div className="checkout-column">
