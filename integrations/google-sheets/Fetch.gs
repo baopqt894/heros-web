@@ -16,7 +16,7 @@ function showFeedbackButton() {
 function fetchFeedback() {
   const properties = PropertiesService.getScriptProperties();
   const key = properties.getProperty('HEROS_FEEDBACK_EXPORT_KEY');
-  if (!key || key.length < 32) throw new Error('Cần cấu hình HEROS_FEEDBACK_EXPORT_KEY giống trên server web trong Project Settings → Script Properties.');
+  if (!key || key.length < 32) throw new Error('Cần cấu hình HEROS_FEEDBACK_EXPORT_KEY giống trên backend Heros trong Project Settings → Script Properties.');
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   if (spreadsheet.getId() !== '1VIyPDgdyM4zj6-dKRDMri68Y5SnKe3sWi0ny99i8h3o') throw new Error('Hãy chạy từ sheet Feedback Heros.');
   const lock = LockService.getScriptLock();
@@ -33,13 +33,17 @@ function fetchFeedback() {
     if (!Number.isSafeInteger(cursor) || cursor < 0) throw new Error('Cursor không hợp lệ.');
     let added = 0;
     for (let page=0;page<10;page++) {
-      const response = UrlFetchApp.fetch('https://heros.dolphinxstudio.com/api/contact/export?after='+cursor, {
+      const response = UrlFetchApp.fetch('https://heros.nextteam.site/v1/contact/export?after='+cursor, {
         method:'get',headers:{Authorization:'Bearer '+key},muteHttpExceptions:true,followRedirects:false
       });
       const status = response.getResponseCode();
-      if (status !== 200) throw new Error(status === 401 ? 'Khóa đồng bộ chưa khớp với server.' : 'API chưa sẵn sàng (HTTP '+status+'). Cần deploy API export và cấu hình server trước.');
+      if (status !== 200) throw new Error(status === 401 ? 'Khóa đồng bộ chưa khớp với server.' : 'API chưa sẵn sàng (HTTP '+status+'). Cần deploy API export và cấu hình khóa backend trước.');
       let data;
-      try { data=JSON.parse(response.getContentText()); } catch(e) { throw new Error('API không trả JSON hợp lệ.'); }
+      try {
+        const result=JSON.parse(response.getContentText());
+        if (result.success !== true || !result.data) throw new Error('Invalid backend response');
+        data=result.data;
+      } catch(e) { throw new Error('API không trả JSON hợp lệ.'); }
       if (!Array.isArray(data.messages) || typeof data.hasMore !== 'boolean' || !Number.isSafeInteger(data.nextCursor) || data.nextCursor < cursor || (data.hasMore && data.nextCursor <= cursor)) throw new Error('Dữ liệu phân trang không hợp lệ.');
       if (data.nextCursor !== cursor + data.messages.length || (data.hasMore && !data.messages.length)) throw new Error('Cursor không khớp dữ liệu.');
       const pageIds = new Set();

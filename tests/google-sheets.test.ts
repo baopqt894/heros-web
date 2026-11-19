@@ -35,9 +35,11 @@ test("Sheets synchronization preserves existing status, escapes formulas, and re
     UrlFetchApp: { fetch: (url: string, options: { headers: { Authorization: string }; followRedirects: boolean }) => {
       assert.equal(options.headers.Authorization, "Bearer " + props.get("HEROS_FEEDBACK_EXPORT_KEY"));
       assert.equal(options.followRedirects, false);
+      assert.equal(new URL(url).origin, "https://heros.nextteam.site");
+      assert.equal(new URL(url).pathname, "/v1/contact/export");
       const after = Number(new URL(url).searchParams.get("after"));
       const messages = [1, 2].filter(id => id > after).map(id => ({ id: String(id).padStart(24, "0"), name: "=HYPERLINK()", email: "test@example.com", phone: "+84900000000", message: "=1+1", createdAt: "2026-11-19T03:00:00.000Z" }));
-      return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ messages, nextCursor: 2, hasMore: false }) };
+      return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ success: true, code: 200, data: { messages, nextCursor: 2, hasMore: false } }) };
     } },
   });
   runInContext(readFileSync(new URL("../integrations/google-sheets/Fetch.gs", import.meta.url), "utf8"), context);

@@ -18,7 +18,7 @@ import {
   type PublicOrder,
 } from "@/lib/commerce";
 import { usePathname, useRouter } from "next/navigation";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -637,16 +637,20 @@ export function Order({ enabled }: { enabled: boolean }) {
 
 export function ContactForm() {
   const [busy, setBusy] = useState(false),
-    [message, setMessage] = useState(""),
+    [sent, setSent] = useState(false),
+    [formHeight, setFormHeight] = useState<number>(),
     [error, setError] = useState("");
   const sending = useRef(false);
+  const reduced = useReducedMotion();
+  const successHeading = useRef<HTMLHeadingElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const returning = useRef(false);
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (sending.current) return;
+    if (sending.current || sent) return;
     sending.current = true;
     setBusy(true);
     setError("");
-    setMessage("");
     const form = event.currentTarget,
       data = new FormData(form);
     try {
@@ -657,9 +661,10 @@ export function ContactForm() {
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error);
-      setMessage(result.message);
-      form.reset();
+      setFormHeight(form.offsetHeight);
+      setSent(true);
     } catch (error) {
+      sending.current = false;
       setError(
         error instanceof Error
           ? error.message
@@ -667,74 +672,124 @@ export function ContactForm() {
       );
     } finally {
       setBusy(false);
-      sending.current = false;
     }
   }
   return (
-    <form className="contact-form" onSubmit={submit}>
-      <div className="contact-name-fields">
-        <label>
-          Tên của bạn
-          <input
-            name="name"
-            autoComplete="name"
-            required
-            minLength={2}
-            maxLength={100}
-            placeholder="Bạn tên là…"
-          />
-        </label>
-        <label>
-          Số điện thoại (không bắt buộc)
-          <input
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            pattern="(0|\+84)[0-9]{9}"
-            placeholder="09xxxxxxxx"
-          />
-        </label>
-      </div>
-      <label>
-        Email của bạn
-        <input
-          name="email"
-          aria-label="Email liên hệ"
-          type="email"
-          autoComplete="email"
-          required
-          placeholder="ban@email.com"
-          maxLength={254}
-        />
-      </label>
-      <label>
-        Lời nhắn cho chúng tớ
-        <textarea
-          name="message"
-          required
-          minLength={5}
-          maxLength={2000}
-          rows={5}
-          placeholder="Bạn muốn chia sẻ điều gì với Heros?"
-        />
-      </label>
-      <button className="button" type="submit" disabled={busy}>
-        {busy ? "Đang gửi…" : "Gửi lời nhắn"}
-        <ArrowUpRight size={18} />
-      </button>
-      {message && (
-        <p className="form-note" role="status">
-          {message}
-        </p>
-      )}
-      {error && (
-        <p className="form-error" role="alert">
-          {error}
-        </p>
-      )}
-      <p className="form-note">
-        Thông tin được lưu để Heros tiếp nhận và hỗ trợ yêu cầu của bạn.
-      </p>
-    </form>
+    <div className="contact-feedback" style={{ minHeight: formHeight }}>
+      <AnimatePresence mode="wait" initial={false}>
+        {sent ? (
+          <motion.div
+            key="thanks"
+            className="contact-thanks"
+            initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.92, rotate: -4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduced ? 0.12 : 0.4, ease: [0.16, 1, 0.3, 1] }}
+            onAnimationComplete={() => successHeading.current?.focus({ preventScroll: true })}
+          >
+            <motion.div
+              className="contact-thanks-mark"
+              aria-hidden="true"
+              initial={reduced ? false : { rotate: -150, scale: 0.6 }}
+              animate={{ rotate: 0, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Heart size={52} weight="duotone" />
+              <span><Check size={17} weight="bold" /></span>
+            </motion.div>
+            <h3 ref={successHeading} tabIndex={-1}>Cảm ơn bạn đã chia sẻ!</h3>
+            <p>Heros đã nhận được lời nhắn của bạn.<br />Mỗi góp ý đều được chúng tớ trân trọng.</p>
+            <button
+              type="button"
+              className="contact-send-another"
+              onClick={() => {
+                returning.current = true;
+                sending.current = false;
+                setSent(false);
+              }}
+            >
+              Gửi lời nhắn khác <ArrowRight size={17} aria-hidden="true" />
+            </button>
+          </motion.div>
+        ) : (
+          <motion.form
+            key="form"
+            ref={formRef}
+            className="contact-form"
+            onSubmit={submit}
+            aria-busy={busy}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.94, rotate: 3 }}
+            transition={{ duration: reduced ? 0.12 : 0.22 }}
+            onAnimationComplete={() => {
+              if (returning.current) {
+                formRef.current?.querySelector<HTMLInputElement>('input[name="name"]')?.focus({ preventScroll: true });
+                returning.current = false;
+              }
+            }}
+          >
+            <div className="contact-name-fields">
+              <label>
+                Tên của bạn
+                <input
+                  name="name"
+                  autoComplete="name"
+                  required
+                  minLength={2}
+                  maxLength={100}
+                  placeholder="Bạn tên là…"
+                />
+              </label>
+              <label>
+                Số điện thoại (không bắt buộc)
+                <input
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  pattern="(0|\+84)[0-9]{9}"
+                  placeholder="09xxxxxxxx"
+                />
+              </label>
+            </div>
+            <label>
+              Email của bạn
+              <input
+                name="email"
+                aria-label="Email liên hệ"
+                type="email"
+                autoComplete="email"
+                required
+                placeholder="ban@email.com"
+                maxLength={254}
+              />
+            </label>
+            <label>
+              Lời nhắn cho chúng tớ
+              <textarea
+                name="message"
+                required
+                minLength={5}
+                maxLength={2000}
+                rows={5}
+                placeholder="Bạn muốn chia sẻ điều gì với Heros?"
+              />
+            </label>
+            <button className="button" type="submit" disabled={busy}>
+              {busy ? "Đang gửi…" : "Gửi lời nhắn"}
+              {busy ? <span className="contact-sending-spinner" aria-hidden="true" /> : <ArrowUpRight size={18} aria-hidden="true" />}
+            </button>
+            {error && (
+              <p className="form-error" role="alert">
+                {error}
+              </p>
+            )}
+            <p className="form-note">
+              Thông tin được lưu để Heros tiếp nhận và hỗ trợ yêu cầu của bạn.
+            </p>
+          </motion.form>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

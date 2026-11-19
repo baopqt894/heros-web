@@ -19,7 +19,7 @@ Mở http://127.0.0.1:3000. `HEROS_SITE_URL` phải khớp origin truy cập đ�
 
 Production Heros dùng `HEROS_SITE_URL=https://heros.dolphinxstudio.com` (không có `/api/contact`). Khi không đặt biến này, production mặc định dùng tên miền trên; development dùng `http://127.0.0.1:3000`. Nếu Vercel đã có giá trị localhost hoặc tên miền cũ, phải sửa biến ở môi trường **Production** và redeploy. Các header `Host`/`X-Forwarded-Host` không được dùng để tự cho phép origin mới.
 
-Form feedback: `POST /api/contact`. API lấy dữ liệu cho Google Sheets: `GET /api/contact/export`, yêu cầu `Authorization: Bearer <HEROS_FEEDBACK_EXPORT_KEY>`; không mở công khai dữ liệu cá nhân. Xem [hướng dẫn Google Sheets](integrations/google-sheets/README.md). POST và export chuyển tiếp tới backend `POST /v1/contact` và `GET /v1/contact/export`; FE không còn ghi SQLite. Backend phải được deploy với ContactModule mới. Nếu backend chưa có route này, form vẫn trả lỗi thay vì báo lưu thành công giả.
+Form feedback: `POST /api/contact`. Nút Google Sheets gọi thẳng backend `GET https://heros.nextteam.site/v1/contact/export`. API proxy tùy chọn `GET /api/contact/export` trên FE cũng có sẵn, yêu cầu `Authorization: Bearer <HEROS_FEEDBACK_EXPORT_KEY>`; không mở công khai dữ liệu cá nhân. Xem [hướng dẫn Google Sheets](integrations/google-sheets/README.md). POST và export chuyển tiếp tới backend `POST /v1/contact` và `GET /v1/contact/export`; FE không còn ghi SQLite. Backend phải được deploy với ContactModule mới. Nếu backend chưa có route này, form vẫn trả lỗi thay vì báo lưu thành công giả.
 
 ## Đơn hàng và thanh toán
 
